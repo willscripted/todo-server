@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="jsonschema.js"></script>
+<script type="text/javascript">
+	schema = {
+  		type:"object",
+  		properties:{
+     			name:{type:"string"},
+     			age:{type:"number"}
+  		}
+	};
+instance = {
+  name:"Kris",
+  age:31
+};
+results = JSONSchema.validate(instance = {
+  name:"Kris",
+  age:31
+};, {
+  		type:"object",
+  		properties:{
+     			name:{type:"string"},
+     			age:{type:"number"}
+  		}
+	};);
+alert(results.valid);
+</script>
+</head>
+
+
+</html>

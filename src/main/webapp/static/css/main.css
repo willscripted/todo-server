@@ -1,0 +1,240 @@
+/* 
+    Document   : main
+    Created on : Aug 18, 2011, 4:51:46 PM
+    Author     : will
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+/***   Reset       ***/
+
+body,div,span,p,h1,h2,h3,h4,h5,h6,input {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    border: none;
+}
+
+ul { list-style-type: none; margin: 0; padding: 0;}
+
+/**********************/
+/***    Defaults    ***/
+/**********************/
+
+#pagewrap {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+
+/***    Fonts       ***/
+
+body {
+    background-color: #FFFFFF;
+    font-family: Arial,Helvetica,Verdana,sans-serif;
+    font-size: 13px;
+    height: 100%;
+}
+
+/***    Headers     ***/
+
+h1 { font-size: 2em; margin: .67em 0; }
+h2 { font-size: 1.5em; margin: .83em 0; }
+h3 { font-size: 1.17em; margin: 1em 0; }
+
+/***    Containers  ***/
+
+.container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.grid {
+    margin: 15px auto;
+    overflow: hidden;
+    width: 960px;
+}
+
+/***    Links       ***/
+a {
+    color: #666666;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #660000;
+    font-weight: bolder;
+}
+
+/*** Header ***/
+
+#logo {
+    color: #888888;
+    float: left;
+    font-family: georgia, serif;
+    font-size: 4em;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0 0 0 15px;
+}
+
+
+#slogan {
+    color: #BBBBBB;
+    float: left;
+    font-family: cursive;
+    font-size: 1.0em;
+    padding: 2.5em 0 0 1.5em;
+}
+
+#main-nav, #section-nav {
+    list-style: none;
+    float: right;
+}
+
+#main-nav li, #section-nav li {
+    display: inline;
+    margin-right: 1em;
+}
+
+#pageTitle {
+    float: left;
+}
+
+div#add {
+    float: right;
+    color: green;
+}
+
+/**********************/
+/***    Footer      ***/
+/**********************/
+.cthird {
+    float: left;
+    margin: 0 0 0 0;
+    padding: 6px;
+    position: relative;
+    width: 298px; /* 310px w/ padding */
+}
+
+.cfull {
+    clear: both;
+    overflow: hidden;
+    padding: 6px;
+    width: 948px; /* 960px w/ padding */
+}
+
+#footer {
+    background-color: #444444;
+    color: #bbbbbb;
+}
+
+    #footer a{
+        color: #bbbbbb;
+        display: block;
+        padding: 5px;
+        text-decoration: none;
+    }
+
+    #footer a:hover{
+        color: #eeeeee;
+        font-weight: 900;
+    }
+
+    #footer div#links {
+        float: right;
+        margin-bottom: 15px;
+    }
+
+
+
+#copyright {
+    padding-top: 1.5em;
+    text-align: center;
+}
+
+
+/***    Table       ***/
+
+table {
+    border: 1px solid #000;
+    width: 100%;
+    text-align: center;
+}
+
+td {
+    border: 1px solid #000;
+    margin: 0px;
+}
+
+form#addTaskForm {
+    clear: both;
+}
+
+input {
+    border: 1px solid #000;
+    padding: 3px;
+    margin: 0px;
+}
+select {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    border-width: 0px;
+    background: transparent;
+    padding-left: .5em;
+    overflow: hidden;
+    background-attachment: fixed;
+}
+option {
+    padding: 3px;
+
+}
+
+tr {
+    height: 2em;
+    padding: 5px;
+}
+
+button {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+}
+
+td.task {
+    font-size: 1.2em;
+    font-weight: 500;
+    text-align: left;
+    padding-left: .5em;
+}
+
+span.gutterTitle {
+    text-align: center;
+}
+
+div.statValue{
+    text-align: right;
+    margin-right: 1em;
+    width: 10px;
+}
+
+div.statName {
+    text-align: left;
+}
+
+#head-grid {
+    border-color: #EEEEEE;
+    border-style: solid;
+    border-width: 0 1px;
+}
+
+div.single {
+    min-height: 500px;
+}
