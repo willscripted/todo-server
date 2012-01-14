@@ -58,6 +58,14 @@
         </property>
     </bean>
 
+    <bean class="todo.JSONSchemaBasedHttpMessageConverter">
+        <property name="schemas">
+            <set>
+                <!-- Todo - extract to annotated configuration class -->
+            </set>
+        </property>
+    </bean>
+
     <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
         <property name="supportedMediaTypes" value="application/json"/>
     </bean>
