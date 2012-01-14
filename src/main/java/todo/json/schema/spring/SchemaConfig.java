@@ -1,4 +1,4 @@
-package todo.webapp.config;
+package todo.json.schema.spring;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;

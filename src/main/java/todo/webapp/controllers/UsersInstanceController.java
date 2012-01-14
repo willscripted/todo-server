@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import todo.hibernate.entities.User;
-import todo.json.schema.spring.SchemaConstrainedJSONConsumer;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,7 +31,6 @@ public class UsersInstanceController {
 
     // PUT
     @RequestMapping(method = RequestMethod.PUT)
-    @SchemaConstrainedJSONConsumer("/path/to/schema")
     public @ResponseBody void put(@PathVariable Long id,
                                   @RequestBody User user) {
         // Validate - if invalid syntactics rc400 - if invalid semantics rc422

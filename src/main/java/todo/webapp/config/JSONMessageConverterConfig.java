@@ -1,4 +1,4 @@
-package todo.json.schema.spring;
+package todo.webapp.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -6,7 +6,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
-import todo.webapp.config.SchemaConfig;
+import todo.json.schema.spring.JSONSchemaBasedHttpMessageConverter;
+import todo.json.schema.spring.SchemaConfig;
 
 import java.io.IOException;
 import java.util.HashSet;

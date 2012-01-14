@@ -82,6 +82,6 @@
         <property name="dataSource" ref="todo-server-database" />
     </bean>
 
-    <bean class="todo.json.schema.spring.JSONMessageConverterConfig" />
+    <bean class="todo.webapp.config.JSONMessageConverterConfig" />
 
 </beans>

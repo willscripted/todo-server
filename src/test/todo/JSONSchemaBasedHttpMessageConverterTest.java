@@ -1,6 +1,7 @@
 package todo;
 
 import org.junit.Before;
+import todo.json.schema.spring.JSONSchemaBasedHttpMessageConverter;
 
 /**
  * User: Will O'Brien

@@ -14,7 +14,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import todo.hibernate.entities.User;
-import todo.webapp.config.SchemaConfig;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,9 +25,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * User: Will O'Brien
- * Date: 1/13/12
- * Time: 6:57 PM
+ * An Http message converter that converts set media types to instances of
+ * their corresponding java type. Similar to Jackson's
+ *
+ * @author Will O'Brien
  */
 public class JSONSchemaBasedHttpMessageConverter implements
                                                  HttpMessageConverter<Object> {
@@ -88,11 +88,10 @@ public class JSONSchemaBasedHttpMessageConverter implements
 
         // Get object from valid json
         JsonNode jsonNode = mapper.readTree(json);
-        User user = mapper.treeToValue(jsonNode,
-                                       User.class);
+        Object constructedObject = mapper.treeToValue(jsonNode, clazz);
 
         // Return object
-        return user;
+        return constructedObject;
     }
 
     /**
