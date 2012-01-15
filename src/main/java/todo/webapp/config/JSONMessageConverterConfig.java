@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import todo.json.schema.spring.JSONSchemaBasedHttpMessageConverter;
 import todo.json.schema.spring.SchemaConfig;
 
@@ -22,6 +23,7 @@ import java.util.Set;
 public class JSONMessageConverterConfig implements ApplicationContextAware{
 
     private ApplicationContext context;
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext)
             throws BeansException {

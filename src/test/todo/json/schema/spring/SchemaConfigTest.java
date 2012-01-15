@@ -1,6 +1,7 @@
 package todo.json.schema.spring;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 
@@ -22,7 +23,8 @@ public class SchemaConfigTest {
     public void setUp() throws Exception {
 
     }
-    
+
+    @Test
     public void testMediaTypeConstruction()  {
         Resource resource = createMock(Resource.class);
         SchemaConfig config = new SchemaConfig(TYPE_STRING,
