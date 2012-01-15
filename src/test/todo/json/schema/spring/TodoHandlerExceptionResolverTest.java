@@ -30,7 +30,7 @@ public class TodoHandlerExceptionResolverTest {
         MockHttpServletRequest req = new MockHttpServletRequest();
         MockHttpServletResponse resp = new MockHttpServletResponse();
         Exception ex = new HttpMessageUnprocessableException("test");
-        Object handler = new User();
+        Object handler = new Object();
 
         exceptionResolver.resolveException(req, resp, handler, ex);
 

@@ -55,7 +55,7 @@ public class JSONSchemaBasedHttpMessageConverter implements
 
     @Override
     public boolean canRead(Class<?> clazz, MediaType mediaType) {
-        return convertables.containsKey(clazz);
+        return convertables.containsKey(clazz) && schemas.containsKey(mediaType);
     }
 
     @Override
