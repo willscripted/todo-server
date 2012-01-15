@@ -15,7 +15,7 @@
 
 
     <!-- Configures the @Controller programming model -->
-    <mvc:annotation-driven conversion-service="conversionService"/>
+    <mvc:annotation-driven />
 
     <aop:aspectj-autoproxy/>
 
@@ -36,6 +36,9 @@
         <property name="basename" value="/WEB-INF/messages/messages"/>
         <property name="cacheSeconds" value="0"/>
     </bean>
+
+    <!-- Resolves Exceptions -->
+    <bean class="todo.json.schema.spring.TodoHandlerExceptionResolver" />
 
     <!-- Resolves view names to protected .jsp resources within the /pages 
     directory -->

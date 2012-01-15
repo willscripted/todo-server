@@ -3,7 +3,6 @@ package todo.hibernate.entities;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.schema.JsonSchema;
-import sun.net.idn.StringPrep;
 
 import java.util.Date;
 
