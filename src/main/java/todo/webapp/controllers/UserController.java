@@ -1,5 +1,6 @@
 package todo.webapp.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,21 +8,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import todo.hibernate.entities.User;
+import todo.persistence.UserDao;
 
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * User: Will O'Brien
- * Date: 1/8/12
- * Time: 11:06 AM
+ * RESTful controller to manipulate instances in the user model
+ *
+ * @author Will O'Brien
  */
 @Controller
 @RequestMapping("/users/{id}")
 public class UserController {
 
-    // GET ID
+    @Autowired
+    private UserDao userDao;
+
+    /**
+     * Get a user by their id
+     * @param id username of the user
+     * @return User identified, or null and status 404
+     */
     @RequestMapping( method = RequestMethod.GET)
-    public @ResponseBody User get(@PathVariable Long id) {
+    public @ResponseBody User get(@PathVariable String id) {
         throw new UnsupportedOperationException();
 
         // if exists
@@ -29,11 +38,16 @@ public class UserController {
         // if does not exist
     }
 
-    // PUT ID
+    /**
+     * Update a user with data from put request, or, if user does not exist,
+     * create that user
+     * @param id username of the user
+     * @param user User
+     */
     @RequestMapping( method = RequestMethod.PUT)
-    public @ResponseBody void put(@PathVariable Long id,
+    public @ResponseBody void put(@PathVariable String id,
                                   @RequestBody User user) {
-        // Validate - if invalid syntactics rc400 - if invalid semantics rc422
+        // Server specific validation
 
         // if exists - updates entity
 
@@ -49,9 +63,12 @@ public class UserController {
         response.setStatus(405);
     }
 
-    // DELETE ID
+    /**
+     * Remove a user by their
+     * @param id username of the user
+     */
     @RequestMapping( method = RequestMethod.DELETE)
-    public @ResponseBody void delete(@PathVariable Long id) {
+    public @ResponseBody void delete(@PathVariable String id) {
         throw new UnsupportedOperationException();
     }
 

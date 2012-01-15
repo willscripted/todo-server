@@ -1,21 +1,51 @@
 package todo.webapp.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import todo.hibernate.entities.User;
+import todo.persistence.UserDao;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.Collection;
 
 /**
- * User: Will O'Brien
- * Date: 1/8/12
- * Time: 11:05 AM
+ * RESTful controller of User resource
+ *
+ * @author Will O'Brien
  */
 @Controller
+@RequestMapping("/users/")
 public class UserResourceController {
 
+    private UserDao userDao;
 
-    // GET
+    @Autowired
+    public UserResourceController(UserDao userdao) {
+        this.userDao = userDao;
+    }
 
-    // PUT
+    /**
+     * Returns a collection of all the usernames in the application
+     * @return Collection<String>
+     */
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody Collection<String> getUsers() {
+        throw new UnsupportedOperationException();
+    }
 
-    // POST
-
-    // DELETE
+    /**
+     * POST, PUT, DELETE return responses with status code 405 - unsupported
+     * operation.
+     * @param response
+     */
+    @RequestMapping(method = {RequestMethod.PUT,
+                            RequestMethod.DELETE,
+                            RequestMethod.POST})
+    public @ResponseBody void unsupported(HttpServletResponse response) {
+        response.setStatus(405);
+    }
 }
