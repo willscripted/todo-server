@@ -13,8 +13,9 @@
     <!-- Scans the classpath of this application for @Components to deploy as beans -->
     <context:component-scan base-package="todo"/>
 
+
     <!-- Configures the @Controller programming model -->
-    <mvc:annotation-driven conversion-service="conversionService"/>
+    <mvc:annotation-driven />
 
     <aop:aspectj-autoproxy/>
 
@@ -36,6 +37,9 @@
         <property name="cacheSeconds" value="0"/>
     </bean>
 
+    <!-- Resolves Exceptions -->
+    <bean class="todo.json.schema.spring.TodoHandlerExceptionResolver" />
+
     <!-- Resolves view names to protected .jsp resources within the /pages 
     directory -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -54,6 +58,7 @@
         <property name="messageConverters">
             <list>
                 <ref bean="jsonConverter"/>
+                <ref bean="jsonSchemaBasedHttpMessageConverter" />
             </list>
         </property>
     </bean>
@@ -80,6 +85,6 @@
         <property name="dataSource" ref="todo-server-database" />
     </bean>
 
-    <import resource="JSONValidator.xml"/>
+    <bean class="todo.webapp.config.JSONMessageConverterConfig" />
 
 </beans>
