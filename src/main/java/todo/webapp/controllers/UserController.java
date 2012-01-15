@@ -17,10 +17,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/users/{id}")
-public class UsersInstanceController {
+public class UserController {
 
-    // GET
-    @RequestMapping(method = RequestMethod.GET)
+    // GET ID
+    @RequestMapping( method = RequestMethod.GET)
     public @ResponseBody User get(@PathVariable Long id) {
         throw new UnsupportedOperationException();
 
@@ -29,8 +29,8 @@ public class UsersInstanceController {
         // if does not exist
     }
 
-    // PUT
-    @RequestMapping(method = RequestMethod.PUT)
+    // PUT ID
+    @RequestMapping( method = RequestMethod.PUT)
     public @ResponseBody void put(@PathVariable Long id,
                                   @RequestBody User user) {
         // Validate - if invalid syntactics rc400 - if invalid semantics rc422
@@ -44,14 +44,16 @@ public class UsersInstanceController {
      * Unsupported operation - Returns status code 405
      * @param response
      */
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping( method = RequestMethod.POST)
     public @ResponseBody void post(HttpServletResponse response) {
         response.setStatus(405);
     }
 
-    // DELETE
-    @RequestMapping(method = RequestMethod.DELETE)
+    // DELETE ID
+    @RequestMapping( method = RequestMethod.DELETE)
     public @ResponseBody void delete(@PathVariable Long id) {
         throw new UnsupportedOperationException();
     }
+
+
 }

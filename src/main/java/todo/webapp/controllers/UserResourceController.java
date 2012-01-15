@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
  * Time: 11:05 AM
  */
 @Controller
-public class UsersResourceController {
+public class UserResourceController {
 
 
     // GET
