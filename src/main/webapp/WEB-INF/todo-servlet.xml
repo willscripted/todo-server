@@ -31,6 +31,11 @@
     <!-- Saves a locale change using a cookie -->
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"/>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="100000"/>
+    </bean>
+
     <!-- Application Message Bundle -->
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basename" value="/WEB-INF/messages/messages"/>
@@ -48,12 +53,6 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-
-        <!-- one of the properties available; the maximum file size in bytes -->
-        <property name="maxUploadSize" value="100000"/>
-    </bean>
-
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
             <list>
@@ -67,24 +66,11 @@
         <property name="supportedMediaTypes" value="application/json"/>
     </bean>
 
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location">
-            <value>classpath:database.properties</value>
-        </property>
-    </bean>
 
-    <bean id="todo-server-database" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="${jdbc.driverClassName}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
-    </bean>
-
-    <bean class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-        <property name="configLocation" value="classpath:hibernate.cfg.xml" />
-        <property name="dataSource" ref="todo-server-database" />
-    </bean>
 
     <bean class="todo.webapp.config.JSONMessageConverterConfig" />
+
+    <import resource="persistence-config.xml" />
+
 
 </beans>
