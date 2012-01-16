@@ -5,6 +5,9 @@
  */
 package todo.hibernate.entities;
 
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.schema.JsonSchema;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
@@ -172,6 +175,14 @@ public class Task implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public static void main(String[] args) throws JsonMappingException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        JsonSchema schema = mapper.generateJsonSchema(Task.class);
+        System.out.println(schema.toString());
+
     }
 
 }

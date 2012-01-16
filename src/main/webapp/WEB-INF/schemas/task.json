@@ -1,21 +1,40 @@
 {
     "type":"object",
     "properties":{
-        "enabled":{
+        "id":{
+            "type":"number"
+        },
+        "title":{
+            "type":"string"
+        },
+        "description":{
+            "type":"string"
+        },
+        "estTime":{
+            "type":"number"
+        },
+        "timeSpent":{
+            "type":"number"
+        },
+        "points":{
+            "type":"integer"
+        },
+        "complete":{
             "type":"boolean",
-            "required":true
+            "requires":true
         },
-        "created":{
-            "type":"number",
-            "required":true
+        "cur":{
+            "type":"boolean",
+            "requires":true
         },
-        "password":{
-            "type":"string",
-            "required":true
+        "priority":{
+            "type":"integer"
         },
-        "username":{
-            "type":"string",
-            "required":true
+        "projectRelevance":{
+            "type":"integer"
+        },
+        "goalRelevance":{
+            "type":"integer"
         }
     }
 }

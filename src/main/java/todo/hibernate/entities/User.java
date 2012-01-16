@@ -3,15 +3,25 @@ package todo.hibernate.entities;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.schema.JsonSchema;
+import org.hibernate.annotations.Entity;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
- * User: Will O'Brien
- * Date: 1/8/12
- * Time: 11:20 AM
+ *
+ * @author Will O'Brien
  */
-public class User {
+@Entity
+@NamedQueries({
+        @NamedQuery(name = "findAllUsernames",
+                    query = "select u.username from User u")
+              })
+@Table(name = "user")
+public class User implements Serializable {
     
     private String username;
     private String password;
@@ -49,11 +59,13 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
-    
+
     public static void main(String[] args) throws JsonMappingException {
-        ObjectMapper mapper = new ObjectMapper();
-        JsonSchema jsonSchema = mapper.generateJsonSchema(User.class);
         
-        System.out.println(jsonSchema.toString());
+        ObjectMapper mapper = new ObjectMapper();
+        JsonSchema schema = mapper.generateJsonSchema(User.class);
+        System.out.println(schema.toString());
+        
     }
+    
 }
