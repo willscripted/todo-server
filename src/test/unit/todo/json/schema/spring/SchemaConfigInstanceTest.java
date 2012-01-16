@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
  * Date: 1/14/12
  * Time: 10:53 AM
  */
-public class SchemaConfigTest {
+public class SchemaConfigInstanceTest {
     private static final String TYPE_STRING = "application/test.schema+json";
     private static final String TYPE = "application";
     private static final String SUB_TYPE = "test.schema+json";
@@ -27,11 +27,11 @@ public class SchemaConfigTest {
     @Test
     public void testMediaTypeConstruction()  {
         Resource resource = createMock(Resource.class);
-        SchemaConfig config = new SchemaConfig(TYPE_STRING,
+        SchemaConfigInstance configInstance = new SchemaConfigInstance(TYPE_STRING,
                                                resource,
                                                CLAZZ);
         
-        MediaType mediaType = config.getMediaType();
+        MediaType mediaType = configInstance.getMediaType();
         assertTrue(mediaType.getType().equals(TYPE));
         assertTrue(mediaType.getSubtype().equals(SUB_TYPE));
     }

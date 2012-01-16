@@ -3,7 +3,7 @@
  * Author: Will O'Brien
  * Copyright: Will O'Brien (c) 2011
  */
-package todo.hibernate.entities;
+package todo.domain;
 
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;

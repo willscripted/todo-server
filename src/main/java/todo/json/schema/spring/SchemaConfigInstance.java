@@ -8,15 +8,15 @@ import org.springframework.http.MediaType;
  * Date: 1/13/12
  * Time: 8:51 PM
  */
-public class SchemaConfig {
+public class SchemaConfigInstance {
     
     private MediaType mediaType;
     private Resource schemaLocation;
     private Class clazz;
 
-    public SchemaConfig(String type,
-                        Resource schemaLocation,
-                        Class clazz) {
+    public SchemaConfigInstance(String type,
+                                Resource schemaLocation,
+                                Class clazz) {
         
         if(type == null 
            || type.equals("")
