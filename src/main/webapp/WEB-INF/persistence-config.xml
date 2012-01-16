@@ -16,11 +16,16 @@
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
-    <bean class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-        <property name="configLocation" value="classpath:hibernate.cfg.xml" />
-        <property name="dataSource" ref="todo-server-database" />
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+        <property name="dataSource" ref="todo-server-database"/>
     </bean>
 
-    <bean class="todo.persistence.PersistenceConfig" />
+    <bean class="todo.persistence.hibernate.HibernateSupportedDaoInvocationHandler">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+
+    <bean class="todo.persistence.PersistenceConfig"/>
 
 </beans>
