@@ -24,7 +24,7 @@ public class UserResourceController {
     private UserDao userDao;
 
     @Autowired
-    public UserResourceController(UserDao userdao) {
+    public UserResourceController(UserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -34,7 +34,7 @@ public class UserResourceController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody Collection<String> getUsers() {
-        throw new UnsupportedOperationException();
+        return null;
     }
 
     /**
