@@ -77,14 +77,15 @@ public class JSONSchemaBasedHttpMessageConverterTest {
         StringInputStream inputStream = new StringInputStream(schema);
         Resource resource = new InputStreamResource(inputStream);
 
-        { // Create configs & add to converter
-            Set<SchemaConfig> configs = new HashSet<SchemaConfig>();
-            SchemaConfig basicConfig = new SchemaConfig("application/todo"
+        { // Create configInstances & add to converter
+            Set<SchemaConfigInstance>
+                    configInstances = new HashSet<SchemaConfigInstance>();
+            SchemaConfigInstance basicConfigInstance = new SchemaConfigInstance("application/todo"
                                                         + ".Basic+json",
                                                         resource,
                                                         CLAZZ);
-            configs.add(basicConfig);
-            converter.setSchemas(configs);
+            configInstances.add(basicConfigInstance);
+            converter.setSchemas(configInstances);
         }
     }
 

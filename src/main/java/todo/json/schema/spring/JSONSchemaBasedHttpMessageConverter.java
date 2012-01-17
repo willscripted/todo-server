@@ -13,8 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import todo.hibernate.entities.User;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -118,13 +116,13 @@ public class JSONSchemaBasedHttpMessageConverter implements
         throw new UnsupportedOperationException();
     }
 
-    public void setSchemas(Set<SchemaConfig> schemaConfigs) throws
+    public void setSchemas(Set<SchemaConfigInstance> schemaConfigInstances) throws
                                                       IOException {
-        for (SchemaConfig config : schemaConfigs) {
-            Class clazz = config.getClazz();
-            Resource schemaLocation = config.getSchemaLocation();
+        for (SchemaConfigInstance configInstance : schemaConfigInstances) {
+            Class clazz = configInstance.getClazz();
+            Resource schemaLocation = configInstance.getSchemaLocation();
 
-            MediaType mediaType = config.getMediaType();
+            MediaType mediaType = configInstance.getMediaType();
             InputStream inputStream = schemaLocation.getInputStream();
             JSONSchema schema = schemaProvider.getSchema(inputStream);
 

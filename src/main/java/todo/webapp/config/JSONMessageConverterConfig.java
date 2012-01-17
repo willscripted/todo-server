@@ -6,9 +6,10 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
-import org.springframework.web.servlet.HandlerExceptionResolver;
+import todo.domain.Task;
+import todo.domain.User;
 import todo.json.schema.spring.JSONSchemaBasedHttpMessageConverter;
-import todo.json.schema.spring.SchemaConfig;
+import todo.json.schema.spring.SchemaConfigInstance;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -41,30 +42,31 @@ public class JSONMessageConverterConfig implements ApplicationContextAware{
         return converter;
     }
 
-    private Set<SchemaConfig> getSchemas() {
-        Set<SchemaConfig> configs = new HashSet<SchemaConfig>();
+    private Set<SchemaConfigInstance> getSchemas() {
+        Set<SchemaConfigInstance>
+                configInstances = new HashSet<SchemaConfigInstance>();
 
-        configs.add(getTaskSchemaConfig());
-        configs.add(getUserSchemaConfig());
+        configInstances.add(getTaskSchemaConfig());
+        configInstances.add(getUserSchemaConfig());
 
-        return configs;
+        return configInstances;
     }
 
 
     // User
-    public SchemaConfig getUserSchemaConfig() {
+    public SchemaConfigInstance getUserSchemaConfig() {
         Resource schemaDefinition = context.getResource("/WEB-INF/schemas/user.json");
-        return new SchemaConfig("application/todo.user+json",
+        return new SchemaConfigInstance("application/todo.user+json",
                                 schemaDefinition,
-                                todo.hibernate.entities.User.class);
+                                User.class);
     }
 
     // Task
-    public SchemaConfig getTaskSchemaConfig() {
+    public SchemaConfigInstance getTaskSchemaConfig() {
         Resource schemaDefinition = context.getResource("/WEB-INF/schemas/task.json");
-        return new SchemaConfig("application/todo.task+json",
+        return new SchemaConfigInstance("application/todo.task+json",
                                 schemaDefinition,
-                                todo.hibernate.entities.Task.class);
+                                Task.class);
     }
 
 
