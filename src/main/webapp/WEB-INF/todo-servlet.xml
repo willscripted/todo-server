@@ -11,6 +11,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
     <!-- Scans the classpath of this application for @Components to deploy as beans -->
+    <!--    note: also adds other components and configurations -->
     <context:component-scan base-package="todo"/>
 
 

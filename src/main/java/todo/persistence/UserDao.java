@@ -1,6 +1,6 @@
 package todo.persistence;
 
-import todo.hibernate.entities.User;
+import todo.domain.User;
 
 import java.util.Collection;
 

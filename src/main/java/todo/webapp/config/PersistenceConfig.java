@@ -6,15 +6,13 @@
 
 package todo.webapp.config;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import todo.hibernate.entities.Task;
-import todo.hibernate.entities.User;
+import todo.domain.Task;
+import todo.domain.User;
 import todo.persistence.GenericDao;
 import todo.persistence.TaskDao;
 import todo.persistence.UserDao;
