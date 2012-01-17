@@ -20,7 +20,7 @@ public interface Command {
     /**
      * Perform command specific action.
      *
-     * @param method  Method whos execution is being handled
+     * @param method  Method whose execution is being handled
      * @param args    Object[] of arguments passed to the method
      * @param session Hibernate session with which to perform this command
      * @return Object to be returned

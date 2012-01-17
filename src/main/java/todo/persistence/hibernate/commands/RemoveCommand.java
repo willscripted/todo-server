@@ -8,16 +8,23 @@ package todo.persistence.hibernate.commands;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.PersistenceException;
+import java.lang.reflect.Method;
 
 /**
  * @author Will O'Brien
  */
-public class RemoveCommand extends TransactionalCommand {
+public class RemoveCommand implements Command {
+
 
     @Override
-    protected Object command(Object[] args, Session session) throws Exception {
+    @Transactional(propagation = Propagation.MANDATORY)
+    public Object execute(Method method, Object[] args, Session session)
+            throws Exception {
+
         try {
             session.delete(args[0]);
             return null;
@@ -25,7 +32,6 @@ public class RemoveCommand extends TransactionalCommand {
             throw new PersistenceException("Could not delete object",
                                            e);
         }
+
     }
-
-
 }

@@ -2,6 +2,8 @@ package todo.persistence.hibernate.commands;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Method;
 
@@ -14,9 +16,9 @@ import java.lang.reflect.Method;
  */
 public class CountCommand implements Command {
 
+    @Transactional(propagation = Propagation.MANDATORY)
     public Object execute(Method method, Object[] args, Session session)
             throws Exception {
-        session.beginTransaction();
         String name = method.getName();
         Query namedQuery = session.getNamedQuery(name);
 

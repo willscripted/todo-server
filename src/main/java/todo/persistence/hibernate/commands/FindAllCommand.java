@@ -9,6 +9,8 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.PersistenceException;
 import java.lang.reflect.Method;
@@ -18,13 +20,10 @@ import java.lang.reflect.Method;
  */
 public class FindAllCommand implements Command {
 
-    public FindAllCommand() {
-    }
-
+    @Transactional(propagation = Propagation.MANDATORY)
     public Object execute(Method method, Object[] args, Session session)
             throws Exception {
         Class target = (Class) args[args.length - 1];
-        Transaction txn = session.beginTransaction();
         try {
             Criteria criteria = session.createCriteria(target);
             return criteria.list();

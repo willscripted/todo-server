@@ -9,6 +9,8 @@ package todo.persistence.hibernate.commands;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.PersistenceException;
 import java.io.Serializable;
@@ -19,10 +21,10 @@ import java.lang.reflect.Method;
  */
 public class FindByPrimaryKeyCommand implements Command {
 
+    @Transactional(propagation = Propagation.MANDATORY)
     public Object execute(Method method, Object[] args, Session session)
             throws Exception {
         try {
-            Transaction tx = session.beginTransaction();
             Object ret = session.get((Class) args[args.length - 1],
                                      (Serializable) args[0]);
             return ret;
