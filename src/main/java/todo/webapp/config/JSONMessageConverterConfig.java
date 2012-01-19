@@ -16,12 +16,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * User: Will O'Brien
- * Date: 1/14/12
- * Time: 9:45 AM
+ * @author Will O'Brien
  */
 @Configuration
-public class JSONMessageConverterConfig implements ApplicationContextAware{
+public class JSONMessageConverterConfig implements ApplicationContextAware {
 
     private ApplicationContext context;
 

@@ -3,12 +3,19 @@ package todo.json.schema.spring;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 
 /**
- * User: Will O'Brien
- * Date: 1/13/12
- * Time: 8:10 PM
+ * Thrown when a received message was syntactically correct but semantically
+ * invalid.
+ *
+ * @author Will O'Brien
  */
-public class HttpMessageUnprocessableException extends HttpMessageNotReadableException {
-    public HttpMessageUnprocessableException(String msg) {
+public class HttpMessageUnprocessableException
+        extends HttpMessageNotReadableException {
+
+    /**
+     * Create new.
+     * @param msg Describing syntactic error.
+     */
+    public HttpMessageUnprocessableException(final String msg) {
         super(msg);
     }
 }

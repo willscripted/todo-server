@@ -38,12 +38,12 @@ public class UserResourceController {
     /**
      * POST, PUT, DELETE return responses with status code 405 - unsupported
      * operation.
-     * @param response
+     * @param response Response to return.
      */
     @RequestMapping(method = {RequestMethod.PUT,
                             RequestMethod.DELETE,
-                            RequestMethod.POST})
-    public @ResponseBody void unsupported(HttpServletResponse response) {
-        response.setStatus(405);
+                            RequestMethod.POST} )
+    public @ResponseBody void unsupported(final HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
 }

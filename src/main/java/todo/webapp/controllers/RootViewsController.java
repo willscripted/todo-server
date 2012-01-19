@@ -6,12 +6,9 @@
 
 package todo.webapp.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Map;
 
 /**
  * @author Will O'Brien
@@ -29,11 +26,6 @@ public class RootViewsController {
      */
     @RequestMapping("")
     public final ModelAndView index() {
-        ModelAndView mav = new ModelAndView("index");
-
-        // Get data for populating count module
-        Map<String, Object> model = mav.getModel();
-
-        return mav;
+        return new ModelAndView("index");
     }
 }

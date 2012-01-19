@@ -1,3 +1,3 @@
 /**
- * Package for accessing application's persistent data
+ * Package defining how this application accesses persistent data.
  */

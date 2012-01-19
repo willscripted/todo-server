@@ -13,11 +13,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import todo.domain.Task;
 import todo.domain.User;
+import todo.persistence.ClassArgInvocationHandlerDecorator;
+import todo.persistence.DaoInvocationHandler;
 import todo.persistence.GenericDao;
 import todo.persistence.TaskDao;
 import todo.persistence.UserDao;
-import todo.persistence.hibernate.ClassArgInvocationHandlerDecorator;
-import todo.persistence.hibernate.HibernateSupportedDaoInvocationHandler;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
@@ -28,7 +28,7 @@ import java.lang.reflect.Proxy;
 @Configuration()
 public class PersistenceConfig implements ApplicationContextAware {
 
-    private HibernateSupportedDaoInvocationHandler hibernateHandler;
+    private DaoInvocationHandler hibernateHandler;
 
     @Bean
     public TaskDao taskDao() {
@@ -62,6 +62,6 @@ public class PersistenceConfig implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext)
             throws BeansException {
         this.hibernateHandler = applicationContext.getBean
-                (HibernateSupportedDaoInvocationHandler.class);
+                (DaoInvocationHandler.class);
     }
 }

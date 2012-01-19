@@ -12,7 +12,13 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -61,18 +67,15 @@ public class Task implements Serializable {
     private Long estTime; // in milliseconds
     private Long timeSpent; // in milliseconds
 
-    // Points
-    @Transient
-    private int points;
-
     // Completed
     private boolean complete;
     private boolean cur;
 
     // Vars that affect points
     private int priority;
-    private int projectRelevance;
-    private int goalRelevance;
+
+    @Column(nullable = false)
+    private User user;
 
 
     public Task() {
@@ -80,21 +83,18 @@ public class Task implements Serializable {
         this.cur = false;
         this.description = "";
         this.estTime = -1L;
-        this.goalRelevance = 0;
-        this.points = 0;
         this.priority = 10;
-        this.projectRelevance = 0;
         this.timeSpent = 0L;
         this.title = "";
 
     }
 
-    public int getPoints() {
-        return points;
+    public User getUser() {
+        return user;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getDescription() {
@@ -129,14 +129,6 @@ public class Task implements Serializable {
         this.cur = cur;
     }
 
-    public int getGoalRelevance() {
-        return goalRelevance;
-    }
-
-    public void setGoalRelevance(int goalRelevance) {
-        this.goalRelevance = goalRelevance;
-    }
-
     public boolean isComplete() {
         return complete;
     }
@@ -151,14 +143,6 @@ public class Task implements Serializable {
 
     public void setPriority(int priority) {
         this.priority = priority;
-    }
-
-    public int getProjectRelevance() {
-        return projectRelevance;
-    }
-
-    public void setProjectRelevance(int projectRelevance) {
-        this.projectRelevance = projectRelevance;
     }
 
     public Long getTimeSpent() {

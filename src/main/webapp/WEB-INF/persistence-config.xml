@@ -26,7 +26,7 @@
         <property name="dataSource" ref="todo-server-database"/>
     </bean>
 
-    <bean class="todo.persistence.hibernate.HibernateSupportedDaoInvocationHandler">
+    <bean class="todo.persistence.DaoInvocationHandler">
         <constructor-arg ref="sessionFactory"/>
     </bean>
 

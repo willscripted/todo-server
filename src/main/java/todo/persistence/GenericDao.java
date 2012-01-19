@@ -3,7 +3,8 @@ package todo.persistence;
 import java.util.Collection;
 
 /**
- * Generic data access object
+ * Generic data access object.
+ * @param <T> the type of entity this GenericDao manages
  */
 public interface GenericDao<T> {
     /**
@@ -42,4 +43,5 @@ public interface GenericDao<T> {
      * @return T
      */
     T findByPrimaryKey(Object key);
+
 }

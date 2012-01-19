@@ -25,7 +25,7 @@ public class User implements Serializable {
     
     private String username;
     private String password;
-    private Date created;
+    private long created;
     private boolean enabled;
 
     public boolean isEnabled() {
@@ -37,11 +37,11 @@ public class User implements Serializable {
     }
 
     public Date getCreated() {
-        return created;
+        return new Date(created);
     }
 
     public void setCreated(Date created) {
-        this.created = created;
+        this.created = created.getTime();
     }
 
     public String getPassword() {
