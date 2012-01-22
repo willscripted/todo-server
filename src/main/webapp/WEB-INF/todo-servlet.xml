@@ -67,10 +67,6 @@
         <property name="supportedMediaTypes" value="application/json"/>
     </bean>
 
-
-
-    <bean class="todo.webapp.config.JSONMessageConverterConfig" />
-
     <import resource="persistence-config.xml" />
 
 

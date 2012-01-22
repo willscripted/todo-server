@@ -33,7 +33,8 @@ public final class HibernateRemoveCommand extends HibernateCommand implements
      * Remove an entity from persistence.
      *
      * @param method Method whose execution is being handled
-     * @param args   [0] - object to remove.
+     * @param args   [0] - Entity to remove.Does not necessarily need to
+     *               exist in the repository.
      * @return null
      */
     @Override

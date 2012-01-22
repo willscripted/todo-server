@@ -24,7 +24,6 @@ public interface AddCommand extends Command {
      * already exists in the repository
      */
     @Override
-    @Transactional(propagation = Propagation.MANDATORY)
     Serializable execute(Method method, Object[] args)
             throws EntityExistsException;
 }

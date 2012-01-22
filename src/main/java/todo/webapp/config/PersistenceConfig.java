@@ -11,11 +11,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import todo.domain.RegistrationForm;
 import todo.domain.Task;
 import todo.domain.User;
 import todo.persistence.ClassArgInvocationHandlerDecorator;
 import todo.persistence.DaoInvocationHandler;
 import todo.persistence.GenericDao;
+import todo.persistence.RegistrationFormDao;
 import todo.persistence.TaskDao;
 import todo.persistence.UserDao;
 
@@ -32,29 +34,36 @@ public class PersistenceConfig implements ApplicationContextAware {
 
     @Bean
     public TaskDao taskDao() {
-        return (TaskDao) getDao(Task.class,
-                                TaskDao.class);
+        return getDao(Task.class,
+                      TaskDao.class);
     }
 
     @Bean
     public UserDao userDao() {
-        return (UserDao) getDao(User.class,
-                                UserDao.class);
+        return getDao(User.class,
+                      UserDao.class);
+    }
+
+    @Bean
+    public RegistrationFormDao registrationFormDao() {
+        return getDao(RegistrationForm.class,
+                      RegistrationFormDao.class);
     }
 
 
-    public GenericDao getDao(Class instanceClass,
-                             Class<? extends GenericDao> daoInterface) {
+    public <T extends GenericDao> T getDao(Class instanceClass,
+                                           Class<T> daoInterface) {
 
-        ClassLoader loader = instanceClass.getClassLoader();
+
+        ClassLoader loader = daoInterface.getClassLoader();
 
         InvocationHandler decoratedHandler = new
                 ClassArgInvocationHandlerDecorator(instanceClass,
                                                    this.hibernateHandler);
 
-        return (GenericDao) Proxy.newProxyInstance(loader,
-                                                   new Class[]{daoInterface},
-                                                   decoratedHandler);
+        return (T) Proxy.newProxyInstance(loader,
+                                          new Class[]{daoInterface},
+                                          decoratedHandler);
 
     }
 

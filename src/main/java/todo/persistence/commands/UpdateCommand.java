@@ -23,6 +23,5 @@ public interface UpdateCommand extends Command {
      * exist
      */
     @Override
-    @Transactional(propagation = Propagation.MANDATORY)
     Object execute(Method method, Object[] args) throws EntityNotFoundException;
 }

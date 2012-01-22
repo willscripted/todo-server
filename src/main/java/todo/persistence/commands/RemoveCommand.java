@@ -27,7 +27,6 @@ public interface RemoveCommand extends Command {
      *
      */
     @Override
-    @Transactional(propagation = Propagation.MANDATORY)
     Object execute(Method method, Object[] args);
 
 }

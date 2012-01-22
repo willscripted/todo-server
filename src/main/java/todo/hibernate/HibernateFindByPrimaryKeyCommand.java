@@ -36,7 +36,7 @@ public final class HibernateFindByPrimaryKeyCommand extends HibernateCommand
      *
      * @param method Method whose execution is being handled
      * @param args   [0] - Serializable - the primary key
-     *               [1] - the entity's class type
+     *               [1] - Class - class of entity to find
      * @return Entity found
      * @throws EntityNotFoundException if no entity was found
      */

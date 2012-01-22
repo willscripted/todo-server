@@ -32,8 +32,8 @@ public final class HibernateFindAllCommand extends HibernateCommand
     /**
      * Query repository for class type and return as list.
      *
-     * @param method Method whose execution is being handled
-     * @param args   [0] - Target class type
+     * @param method Method whose execution is being handled.
+     * @param args   [0] - Class - class of entity to list.
      * @return List of entities found.
      */
     @Override

@@ -8,6 +8,8 @@ package todo.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import todo.persistence.commands.AddCommand;
 
 import javax.persistence.EntityExistsException;
@@ -32,12 +34,12 @@ public final class HibernateAddCommand extends HibernateCommand implements
     }
 
     /**
-     *
+     * Add an entity to the repository.
      * @param method Method whose execution is being handled
      * @param args   [0] - Entity to be added
      * @return Serializable id of the added entity
-     * @throws EntityExistsException if object to persist has an id set that
-     * already exists in the repository
+     *
+     * Note: the entity will be assigned an id regardless of current id.
      */
     @Override
     public Serializable execute(final Method method,
