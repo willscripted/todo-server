@@ -9,6 +9,8 @@ package todo.webapp.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.tiles2.TilesView;
 
 /**
  * @author Will O'Brien
@@ -25,7 +27,7 @@ public class RootViewsController {
      * @return ModelAndView Preped with data to support all displayed modules.
      */
     @RequestMapping("")
-    public final ModelAndView index() {
-        return new ModelAndView("index");
+    public final String index() {
+        return "base";
     }
 }
