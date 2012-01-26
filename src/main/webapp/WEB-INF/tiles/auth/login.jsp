@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div>
-    <form action="<c:url value="/j_spring_security_check" />" method="POST">
+    <form action="/j_spring_security_check" method="POST">
     <fieldset>
         <div class="group">
             <div class="label">
