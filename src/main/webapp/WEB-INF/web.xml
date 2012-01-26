@@ -83,7 +83,7 @@
 
     <servlet-mapping>
         <servlet-name>jsp</servlet-name>
-        <url-pattern>/WEB-INF/pages/*</url-pattern>
+        <url-pattern>/WEB-INF/tiles/*</url-pattern>
     </servlet-mapping>
 
     <listener>

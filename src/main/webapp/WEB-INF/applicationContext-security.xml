@@ -22,6 +22,7 @@
                        access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/favicon.ico"
                        access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/**" access="ROLE_USER"/>
         <logout logout-url="/logout/" logout-success-url="/"/>
         <form-login

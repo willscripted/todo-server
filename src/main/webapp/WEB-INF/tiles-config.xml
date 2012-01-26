@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+
+<tiles-definitions>
+
+    <definition name="base"
+                template="/WEB-INF/tiles/baseLayout.jsp">
+        <put-attribute name="title" value="Template" />
+        <put-attribute name="head" value="/WEB-INF/tiles/head.jsp" />
+        <put-attribute name="pageHeader" value="/WEB-INF/tiles/pageHeader.jsp" />
+        <put-attribute name="body" value="/WEB-INF/tiles/body.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+        <put-attribute name="js" value="/WEB-INF/tiles/js.jsp" />
+    </definition>
+
+    <definition name="auth/login" extends="base">
+        <put-attribute name="title" value="Todo - Login" />
+        <put-attribute name="body" value="/WEB-INF/tiles/auth/login.jsp" />
+    </definition>
+
+</tiles-definitions>

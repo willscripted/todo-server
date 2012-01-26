@@ -22,7 +22,7 @@ public class AuthenticationViewsController {
      */
     @RequestMapping("/login/")
     public final String login() {
-        return "auth-reg/login";
+        return "auth/login";
     }
 
 
@@ -34,7 +34,7 @@ public class AuthenticationViewsController {
      */
     @RequestMapping("/login/invalid/")
     public final ModelAndView invalidLogin() {
-        ModelAndView mav = new ModelAndView("auth-reg/login");
+        ModelAndView mav = new ModelAndView("auth/login");
         mav.addObject("invalid",
                       true);
         return mav;
