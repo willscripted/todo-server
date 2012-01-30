@@ -16,7 +16,7 @@ import java.util.HashMap;
 /**
  * Factory that creates persistence commands that use hibernate logic.
  *
- * @author
+ * @author Will O'Brien
  */
 @Component
 public class HibernateCommandFactory implements AbstractCommandFactory {

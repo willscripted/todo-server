@@ -4,7 +4,7 @@
  * Copyright: Will O'Brien (c) 2011
  */
 
-package todo.webapp.config;
+package todo.persistence;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -49,7 +49,6 @@ public class PersistenceConfig implements ApplicationContextAware {
         return getDao(RegistrationForm.class,
                       RegistrationFormDao.class);
     }
-
 
     public <T extends GenericDao> T getDao(Class instanceClass,
                                            Class<T> daoInterface) {

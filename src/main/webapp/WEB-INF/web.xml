@@ -12,6 +12,8 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             /WEB-INF/applicationContext-security.xml
+            classpath:/WEB-INF/tiles-config.xml
+            /WEB-INF/todo-servlet.xml
         </param-value>
     </context-param>
     <context-param>

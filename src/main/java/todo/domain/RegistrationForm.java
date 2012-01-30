@@ -1,7 +1,13 @@
 package todo.domain;
 
-import org.hibernate.annotations.Entity;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.schema.JsonSchema;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -14,10 +20,15 @@ import java.util.Date;
 public class RegistrationForm {
 
     @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment",
+                      strategy = "increment")
     private Long id;
 
     private Long created;
-    private Long sessionId;
+
+    @Column(nullable = false, unique = true)
+    private String sessionId;
 
     private Boolean agreeToTOS;
     
@@ -42,11 +53,11 @@ public class RegistrationForm {
         this.created = created.getTime();
     }
 
-    public Long getSessionId() {
+    public String getSessionId() {
         return sessionId;
     }
 
-    public void setSessionId(Long sessionId) {
+    public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }
 
@@ -81,4 +92,13 @@ public class RegistrationForm {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public static void main(String[] args) throws JsonMappingException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        JsonSchema schema = mapper.generateJsonSchema(RegistrationForm.class);
+        System.out.println(schema.toString());
+
+    }
+
 }

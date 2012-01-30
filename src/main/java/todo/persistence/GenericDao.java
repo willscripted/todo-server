@@ -1,5 +1,6 @@
 package todo.persistence;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -12,7 +13,7 @@ public interface GenericDao<T> {
      *
      * @param t T to add. Does not yet have a unique identifier.
      */
-    void add(T t);
+    Serializable add(T t);
 
     /**
      * Update an existing persistent object with the state of the object

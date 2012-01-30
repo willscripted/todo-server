@@ -26,7 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  * From <a href="https://gist.github.com/1333097">max747's public gist</a>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration( locations = {"classpath:/WEB-INF/todo-servlet.xml"})
+@ContextConfiguration( locations = {"classpath:/WEB-INF/todo-servlet.xml",
+                                    "classpath:/WEB-INF/applicationContext-security.xml"})
 public abstract class ControllerFunctionalTestBase {
 
     @Autowired

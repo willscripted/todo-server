@@ -3,7 +3,7 @@
  * Author: Will O'Brien
  * Copyright: Will O'Brien (c) 2011
  */
-package todo.webapp.controllers;
+package todo.webapp.controllers.ui;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

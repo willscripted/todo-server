@@ -23,7 +23,8 @@
         <property name="dataSource" ref="todo-server-database"/>
         <property name="hibernateProperties">
             <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-                <property name="location" value="hibernate-test.properties"/>
+                <property name="location"
+                          value="classpath:hibernate-test.properties"/>
             </bean>
         </property>
     </bean>

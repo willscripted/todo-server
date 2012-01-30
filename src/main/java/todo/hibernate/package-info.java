@@ -1,4 +1,7 @@
 /**
- * Package containing hibernate implementations of this project's persistence
- * architecture.
+ * Hibernate implementations persistence architecture.
+ *
+ * @see todo.persistence.commands;
  */
+
+package todo.hibernate;

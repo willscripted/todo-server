@@ -22,7 +22,24 @@
     <link href="/static/images/favicon.ico" rel="icon" type="image/x-icon" />
 
     <script src="/static/js/libs/modernizr-2.0.6.min.js"></script>
+    <script type="text/javascript">
+        var dojoConfig = {
+            parseOnLoad: true,
+            isDebug: true
+        };
+    </script>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.1/dojo/dojo.js" type="text/javascript"></script>
+    <script>window.dojo ||
+            document.write('<script src="/static/js/libs/dojo-release-1.7.1/dojo/dojo.js"><\/script>')</script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/static/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+
+    <script type="text/javascript">
+        dojo.require('dojo/parser');
+    </script>
     <tiles:insertAttribute name="head"/>
 </head>
 <body>
@@ -38,12 +55,6 @@
         <tiles:insertAttribute name="footer"/>
     </footer>
 </div> <!--! end of #container -->
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="/static/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
-
-<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.1/dojo/dojo.js" type="text/javascript"></script>
-<script>window.jQuery || document.write('<script src="/static/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 
 <!--[if lt IE 7 ]>
 <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>

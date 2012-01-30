@@ -16,7 +16,7 @@
         <c:if test="${sessionScope['SPRING_SECURITY_CONTEXT'] == null}">
 
             <a href="/login/">[ Sign-in ]</a>
-            <a href="/new-account/">[ Create Account ]</a>
+            <a href="/registration/">[ Create Account ]</a>
 
         </c:if>
     </div>

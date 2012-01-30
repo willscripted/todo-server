@@ -1,3 +1,6 @@
 /**
- * Package defining how this application accesses persistent data.
+ * Provides this application with basic CRUD, independent of underlying
+ * persistence architecture.
  */
+
+package todo.persistence;

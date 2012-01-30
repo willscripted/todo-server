@@ -29,6 +29,34 @@ ul li {
     list-style: none;
 }
 
+/*** Forms ***/
+form div {
+    padding-bottom: 1em;
+}
+
+form div *:not([type="checkbox"]) {
+    diplay: block;
+    float: left;
+}
+
+form div input {
+    clear: left;
+    margin-right: 1em;
+}
+
+form div input, div.errors {
+    padding: 3px;
+    margin-top: .3em;
+}
+
+form div div.errors {
+    padding-top: 6px;
+}
+
+.errors {
+    color: #AA0000;
+}
+
 /*** General Layout ***/
 
 div#container {

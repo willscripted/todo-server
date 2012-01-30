@@ -1,0 +1,21 @@
+{
+    "type":"object",
+    "properties":{
+        "agreeToTOS":{
+            "type":"string",
+            "enum":["true"]
+        },
+        "username":{
+            "type":"string",
+            "minLength":3,
+            "pattern":"^[a-zA-Z][a-zA-Z0-9_]*$"
+        },
+        "email":{
+            "type":"string"
+        },
+        "password":{
+            "type":"string",
+            "minLength": 6
+        }
+    }
+}

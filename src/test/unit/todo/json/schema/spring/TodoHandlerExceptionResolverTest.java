@@ -10,9 +10,7 @@ import java.lang.Object;
 import static org.junit.Assert.assertTrue;
 
 /**
- * User: Will O'Brien
- * Date: 1/14/12
- * Time: 4:55 PM
+ *
  */
 public class TodoHandlerExceptionResolverTest {
 

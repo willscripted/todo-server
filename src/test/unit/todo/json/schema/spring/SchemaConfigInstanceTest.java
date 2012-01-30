@@ -9,9 +9,7 @@ import static org.easymock.EasyMock.createMock;
 import static org.junit.Assert.assertTrue;
 
 /**
- * User: Will O'Brien
- * Date: 1/14/12
- * Time: 10:53 AM
+ *
  */
 public class SchemaConfigInstanceTest {
     private static final String TYPE_STRING = "application/test.schema+json";
