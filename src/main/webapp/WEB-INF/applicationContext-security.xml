@@ -8,20 +8,37 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-    <beans:bean id="passEncoder"
-                class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/>
+    <beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+        <beans:constructor-arg value="256"/>
+    </beans:bean>
+
+    <beans:bean id="todoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <beans:property name="userDetailsService">
+            <beans:bean class="todo.security.spring.TodoUserDetailsService"/>
+        </beans:property>
+        <beans:property name="passwordEncoder" ref="passwordEncoder"/>
+        <beans:property name="saltSource">
+            <beans:bean
+                    class="todo.security.spring.TodoSaltSource"/>
+        </beans:property>
+    </beans:bean>
 
     <http auto-config="true">
         <intercept-url pattern="/login/**"
                        access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/static/**"
                        access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <intercept-url pattern="/services/**"
-                       access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <intercept-url pattern="/dwr/**"
-                       access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/favicon.ico"
                        access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/tos/**"
+                       access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/api/users/**"
+                       access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <intercept-url pattern="/registration/**"
+                       access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/users/**"
+                       access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/**" access="ROLE_USER"/>
         <logout logout-url="/logout/" logout-success-url="/"/>
         <form-login
@@ -29,14 +46,19 @@
                 authentication-failure-url="/login/invalid/"/>
     </http>
 
+    <!--<authentication-manager>-->
+    <!--<authentication-provider>-->
+    <!--&lt;!&ndash;<password-encoder hash="md5"/> &ndash;&gt;-->
+    <!--<user-service>-->
+    <!--<user name="will" password="will"-->
+    <!--authorities="ROLE_ADMIN, ROLE_USER"/>-->
+    <!--</user-service>-->
+    <!--</authentication-provider>-->
+    <!--</authentication-manager>-->
+
+
     <authentication-manager>
-        <authentication-provider>
-            <!--<password-encoder hash="md5"/> -->
-            <user-service>
-                <user name="will" password="will"
-                      authorities="ROLE_ADMIN, ROLE_USER"/>
-            </user-service>
-        </authentication-provider>
+        <authentication-provider ref="todoAuthenticationProvider"/>
     </authentication-manager>
 
 

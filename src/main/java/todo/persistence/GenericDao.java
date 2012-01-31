@@ -1,11 +1,11 @@
 package todo.persistence;
 
-import todo.hibernate.entities.Task;
-
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
- * Generic data access object
+ * Generic data access object.
+ * @param <T> the type of entity this GenericDao manages
  */
 public interface GenericDao<T> {
     /**
@@ -13,7 +13,7 @@ public interface GenericDao<T> {
      *
      * @param t T to add. Does not yet have a unique identifier.
      */
-    void add(T t);
+    Serializable add(T t);
 
     /**
      * Update an existing persistent object with the state of the object
@@ -44,4 +44,5 @@ public interface GenericDao<T> {
      * @return T
      */
     T findByPrimaryKey(Object key);
+
 }

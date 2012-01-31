@@ -5,17 +5,63 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
     <!-- Scans the classpath of this application for @Components to deploy as beans -->
+    <!--    note: also adds other components and configurations -->
     <context:component-scan base-package="todo"/>
 
 
     <!-- Configures the @Controller programming model -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="todo.json.schema.spring.JSONSchemaBasedHttpMessageConverter"
+                  id="jsonSchemaBasedHttpMessageConverter">
+                <property name="schemas">
+                    <set>
+                        <bean class="todo.json.schema.spring.SchemaConfigInstance">
+                            <constructor-arg index="0">
+                                <value>application/todo.domain.User+json</value>
+                            </constructor-arg>
+                            <constructor-arg index="1">
+                                <value>/static/json/schema/User.json</value>
+                            </constructor-arg>
+                            <constructor-arg index="2">
+                                <value>todo.domain.User</value>
+                            </constructor-arg>
+                        </bean>
+                        <bean class="todo.json.schema.spring.SchemaConfigInstance">
+                            <constructor-arg index="0">
+                                <value>application/todo.domain.Task+json</value>
+                            </constructor-arg>
+                            <constructor-arg index="1">
+                                <value>/static/json/schema/Task.json</value>
+                            </constructor-arg>
+                            <constructor-arg index="2">
+                                <value>todo.domain.Task</value>
+                            </constructor-arg>
+                        </bean>
+                        <bean class="todo.json.schema.spring.SchemaConfigInstance">
+                            <constructor-arg index="0">
+                                <value>application/todo.domain.RegistrationForm+json</value>
+                            </constructor-arg>
+                            <constructor-arg index="1">
+                                <value>/static/json/schema/RegistrationForm.json</value>
+                            </constructor-arg>
+                            <constructor-arg index="2">
+                                <value>todo.domain.RegistrationForm</value>
+                            </constructor-arg>
+                        </bean>
+                    </set>
+                </property>
+            </bean>
+            <bean
+                    class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <aop:aspectj-autoproxy/>
 
@@ -43,21 +89,26 @@
     </bean>
 
     <!-- Resolves Exceptions -->
-    <bean class="todo.json.schema.spring.TodoHandlerExceptionResolver" />
+    <bean class="todo.json.schema.spring.TodoHandlerExceptionResolver"/>
 
-    <!-- Resolves view names to protected .jsp resources within the /pages 
-    directory -->
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/pages/"/>
-        <property name="suffix" value=".jsp"/>
+    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
     </bean>
+
+
+    <!--&lt;!&ndash; Resolves view names to protected .jsp resources within the /pages-->
+    <!--directory &ndash;&gt;-->
+    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+    <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
+    <!--<property name="prefix" value="/WEB-INF/pages/"/>-->
+    <!--<property name="suffix" value=".jsp"/>-->
+    <!--</bean>-->
 
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
             <list>
                 <ref bean="jsonConverter"/>
-                <ref bean="jsonSchemaBasedHttpMessageConverter" />
+                <ref bean="jsonSchemaBasedHttpMessageConverter"/>
             </list>
         </property>
     </bean>
@@ -66,11 +117,17 @@
         <property name="supportedMediaTypes" value="application/json"/>
     </bean>
 
+    <import resource="persistence-config.xml"/>
+    <import resource="httpmessageconv-config.xml"/>
 
-
-    <bean class="todo.webapp.config.JSONMessageConverterConfig" />
-
-    <import resource="persistence-config.xml" />
+    <!--<bean id="tilesConfigurer"-->
+    <!--class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">-->
+    <!--<property name="definitions">-->
+    <!--<list>-->
+    <!--<value>/WEB-INF/tiles-defs.xml</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
 
 
 </beans>

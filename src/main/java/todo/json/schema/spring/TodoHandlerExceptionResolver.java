@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * User: Will O'Brien
- * Date: 1/14/12
- * Time: 3:16 PM
+ * Extends the DefaultHandlerExceptionResolver to support
+ * HttpMessageUnprocessableException. Newly supported exception will result
+ * in a status code of 422 - UnprocessableEntity (see WebDAV).
+ *
+ * @see todo.json.schema.spring.HttpMessageUnprocessableException
  */
-public class TodoHandlerExceptionResolver extends
+public class  TodoHandlerExceptionResolver extends
                                           DefaultHandlerExceptionResolver {
 
     @Override

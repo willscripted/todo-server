@@ -6,7 +6,7 @@
 
 package todo.persistence;
 
-import todo.hibernate.entities.Task;
+import todo.domain.Task;
 
 import java.util.Collection;
 

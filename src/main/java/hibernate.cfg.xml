@@ -7,11 +7,7 @@
 <hibernate-configuration>
     <session-factory>
 
-        <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-
-        <!-- Enable Hibernate's automatic session context management -->
-        <property name="current_session_context_class">thread</property>
+        <!-- SQL dialect -see properties file -->
 
         <!-- Substitue 1 for true and 0 for false in HQL queries -->
         <property name="hibernate.query.substitutions">true 1, false 0</property>
@@ -22,11 +18,9 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
 
-
-        <!-- Drop and re-create the database schema on startup -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
-
-        <mapping class="todo.hibernate.entities.Task"/>
+        <mapping class="todo.domain.Task" />
+        <mapping class="todo.domain.User" />
+        <mapping class="todo.domain.RegistrationForm" />
 
 
     </session-factory>

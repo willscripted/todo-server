@@ -6,12 +6,20 @@
 
 package todo.persistence;
 
-import org.hibernate.SessionFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import todo.hibernate.entities.Task;
-import todo.persistence.hibernate.ClassArgInvocationHandlerDecorator;
-import todo.persistence.hibernate.HibernateSupportedDaoInvocationHandler;
+import todo.domain.RegistrationForm;
+import todo.domain.Task;
+import todo.domain.User;
+import todo.persistence.ClassArgInvocationHandlerDecorator;
+import todo.persistence.DaoInvocationHandler;
+import todo.persistence.GenericDao;
+import todo.persistence.RegistrationFormDao;
+import todo.persistence.TaskDao;
+import todo.persistence.UserDao;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
@@ -19,30 +27,49 @@ import java.lang.reflect.Proxy;
 /**
  * @author Will O'Brien
  */
-@Configuration
-public class PersistenceConfig {
+@Configuration()
+public class PersistenceConfig implements ApplicationContextAware {
+
+    private DaoInvocationHandler hibernateHandler;
 
     @Bean
-    public HibernateSupportedDaoInvocationHandler handler(SessionFactory sf) {
-
-        return new HibernateSupportedDaoInvocationHandler(sf);
-
+    public TaskDao taskDao() {
+        return getDao(Task.class,
+                      TaskDao.class);
     }
 
     @Bean
-    public TaskDao taskDao(
-            HibernateSupportedDaoInvocationHandler hibernateHandler) {
+    public UserDao userDao() {
+        return getDao(User.class,
+                      UserDao.class);
+    }
+
+    @Bean
+    public RegistrationFormDao registrationFormDao() {
+        return getDao(RegistrationForm.class,
+                      RegistrationFormDao.class);
+    }
+
+    public <T extends GenericDao> T getDao(Class instanceClass,
+                                           Class<T> daoInterface) {
 
 
-        ClassLoader loader = TaskDao.class.getClassLoader();
+        ClassLoader loader = daoInterface.getClassLoader();
 
         InvocationHandler decoratedHandler = new
-                ClassArgInvocationHandlerDecorator(Task.class,
-                                                   hibernateHandler);
+                ClassArgInvocationHandlerDecorator(instanceClass,
+                                                   this.hibernateHandler);
 
-        return (TaskDao) Proxy.newProxyInstance(loader,
-                                                new Class[]{TaskDao.class},
-                                                decoratedHandler);
+        return (T) Proxy.newProxyInstance(loader,
+                                          new Class[]{daoInterface},
+                                          decoratedHandler);
 
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext)
+            throws BeansException {
+        this.hibernateHandler = applicationContext.getBean
+                (DaoInvocationHandler.class);
     }
 }
