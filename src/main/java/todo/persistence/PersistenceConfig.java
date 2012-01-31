@@ -11,15 +11,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import todo.domain.RegistrationForm;
 import todo.domain.Task;
 import todo.domain.User;
-import todo.persistence.ClassArgInvocationHandlerDecorator;
-import todo.persistence.DaoInvocationHandler;
-import todo.persistence.GenericDao;
-import todo.persistence.RegistrationFormDao;
-import todo.persistence.TaskDao;
-import todo.persistence.UserDao;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
@@ -42,12 +35,6 @@ public class PersistenceConfig implements ApplicationContextAware {
     public UserDao userDao() {
         return getDao(User.class,
                       UserDao.class);
-    }
-
-    @Bean
-    public RegistrationFormDao registrationFormDao() {
-        return getDao(RegistrationForm.class,
-                      RegistrationFormDao.class);
     }
 
     public <T extends GenericDao> T getDao(Class instanceClass,

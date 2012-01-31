@@ -59,7 +59,9 @@
                 </property>
             </bean>
             <bean
-                    class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+                    class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+                <property name="supportedMediaTypes" value="application/json"/>
+            </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
 
@@ -95,39 +97,6 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
     </bean>
 
-
-    <!--&lt;!&ndash; Resolves view names to protected .jsp resources within the /pages-->
-    <!--directory &ndash;&gt;-->
-    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-    <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
-    <!--<property name="prefix" value="/WEB-INF/pages/"/>-->
-    <!--<property name="suffix" value=".jsp"/>-->
-    <!--</bean>-->
-
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="jsonConverter"/>
-                <ref bean="jsonSchemaBasedHttpMessageConverter"/>
-            </list>
-        </property>
-    </bean>
-
-    <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-        <property name="supportedMediaTypes" value="application/json"/>
-    </bean>
-
     <import resource="persistence-config.xml"/>
-    <import resource="httpmessageconv-config.xml"/>
-
-    <!--<bean id="tilesConfigurer"-->
-    <!--class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">-->
-    <!--<property name="definitions">-->
-    <!--<list>-->
-    <!--<value>/WEB-INF/tiles-defs.xml</value>-->
-    <!--</list>-->
-    <!--</property>-->
-    <!--</bean>-->
-
 
 </beans>

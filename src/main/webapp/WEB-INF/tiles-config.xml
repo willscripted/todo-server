@@ -7,7 +7,7 @@
           class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
         <property name="definitions">
             <list>
-                <value>/WEB-INF/tiles-defs.xml</value>
+                <value>/WEB-INF/tiles/tiles-defs.xml</value>
             </list>
         </property>
     </bean>

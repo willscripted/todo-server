@@ -33,7 +33,7 @@ public class HibernateCommandFactory implements AbstractCommandFactory {
     @Autowired
     public HibernateCommandFactory(final SessionFactory sf) {
         this.commands = new HashMap<Class, HibernateCommand>();
-        
+
         commands.put(AddCommand.class, new HibernateAddCommand(sf));
         commands.put(UpdateCommand.class, new HibernateUpdateCommand(sf));
         commands.put(RemoveCommand.class, new HibernateRemoveCommand(sf));

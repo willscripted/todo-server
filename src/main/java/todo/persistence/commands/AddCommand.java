@@ -1,8 +1,5 @@
 package todo.persistence.commands;
 
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityExistsException;
 import java.io.Serializable;
 import java.lang.reflect.Method;

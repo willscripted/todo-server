@@ -7,10 +7,10 @@ import todo.domain.User;
 import java.util.Collection;
 
 /**
- * Creates a UserDetails object from a ImmutableUser object. UserDetails obj can be
- * plugged into the spring security system.
+ * UserDetails obj that can be plugged into the spring
+ * security system.
  *
- * @author whobrien
+ * @author Will O'Brien
  */
 public final class TodoUserDetails implements UserDetails {
 
@@ -25,7 +25,8 @@ public final class TodoUserDetails implements UserDetails {
      *
      * @param user - The user whose access tolken is being created
      */
-    public TodoUserDetails(User user, Collection<GrantedAuthority> authorities) {
+    public TodoUserDetails(User user,
+                           Collection<GrantedAuthority> authorities) {
 
         { // Get user info
             this.username = user.getUsername();
@@ -53,7 +54,7 @@ public final class TodoUserDetails implements UserDetails {
 
     /**
      * @return the ImmutableUser's email, which will serve as their 'Username' for Spring
-     * Security purposes.
+     *         Security purposes.
      */
     @Override
     public String getUsername() {
@@ -82,10 +83,16 @@ public final class TodoUserDetails implements UserDetails {
 
     @Override
     public String toString() {
-        return "TodoUserDetails: " + "Username/Email: " + this.getUsername() +
-                "Password: " + this.getPassword() +
-                "Locked: " + this.isAccountLocked +
-                "Enabled: " + this.isEnabled +
-                "Auths: " + this.getAuthorities();
+        return "TodoUserDetails: "
+               + "Username/Email: "
+               + this.getUsername()
+               + "Password: "
+               + this.getPassword()
+               + "Locked: "
+               + this.isAccountLocked
+               + "Enabled: "
+               + this.isEnabled
+               + "Auths: "
+               + this.getAuthorities();
     }
 }

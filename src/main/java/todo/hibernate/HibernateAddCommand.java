@@ -8,8 +8,6 @@ package todo.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import todo.persistence.commands.AddCommand;
 
 import javax.persistence.EntityExistsException;

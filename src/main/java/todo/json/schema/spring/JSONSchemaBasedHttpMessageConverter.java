@@ -28,7 +28,7 @@ import java.util.Set;
  *
  * @author Will O'Brien
  */
-public class JSONSchemaBasedHttpMessageConverter implements
+public final class JSONSchemaBasedHttpMessageConverter implements
                                                  HttpMessageConverter<Object> {
 
     /**
@@ -44,7 +44,7 @@ public class JSONSchemaBasedHttpMessageConverter implements
     private final Set<MediaType> mediaTypes;
 
     /**
-     * Object mapper used to convert to/from json and target classes
+     * Object mapper used to convert to/from json and target classes.
      */
     private final ObjectMapper mapper;
 
@@ -54,6 +54,9 @@ public class JSONSchemaBasedHttpMessageConverter implements
     private final JSONSchemaProvider schemaProvider;
 
 
+    /**
+     * New converter with no set mappings.
+     */
     public JSONSchemaBasedHttpMessageConverter() {
 
         convertionMap = new MultiKeyMap();
