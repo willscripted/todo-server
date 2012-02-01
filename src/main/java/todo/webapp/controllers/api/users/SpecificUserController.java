@@ -7,14 +7,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import todo.domain.RegistrationForm;
 import todo.domain.User;
 import todo.services.UserService;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Date;
 
 /**
  * Controller for managing a specific user resource.
@@ -23,8 +19,11 @@ import java.util.Date;
  */
 @Controller
 @RequestMapping("/api/users/{username}/")
-public class SpecificUserController {
+public final class SpecificUserController {
 
+    /**
+     * UserService provides access to User resources.
+     */
     @Autowired
     private UserService userService;
 
@@ -32,64 +31,49 @@ public class SpecificUserController {
      * Get specific user of application.
      *
      * @param username Username of user entity.
-     * @return User
+     * @return User application/todo.domain.User+json - password censored
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET,
+                    produces = "application/todo.domain"
+                               + ".User+json")
     public
     @ResponseBody
-    User get(@PathVariable String username) {
+    User get(final @PathVariable String username,
+             final HttpServletResponse response) {
+
+        User user = userService.getUserByUsername(username);
+
+        if (user == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
+
         // Ensure password is not sent
-        throw new UnsupportedOperationException();
-    }
-
-    @RequestMapping(method = RequestMethod.PUT,
-                    consumes = "application/todo.domain.RegistrationForm+json")
-    public
-    @ResponseBody
-    void registerUsername(final @PathVariable String username,
-                          final @RequestBody RegistrationForm form,
-                          final HttpServletResponse response) {
-
-        // If user exists, throw bad request
-        if (userService.usernameExists(username)) {
-
-            try {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-                                   "Username taken");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        // Else create new user
-        // Todo - consider moving registration to POST /users/ to maintain
-        // method idempotence
-        else {
-            User user = new User();
-            user.setCreated(new Date());
-            user.setPassword(form.getPassword());
-            user.setEmail(form.getEmail());
-            user.setUsername(form.getUsername());
-
-            userService.createUser(user);
-
-            response.setStatus(HttpServletResponse.SC_ACCEPTED);
-        }
+        user.setPassword("[### PROTECTED ###]");
+        return user;
 
     }
+
 
     /**
      * PUT - Update user entity for username.
      *
      * @param username
      */
-    @RequestMapping(method = RequestMethod.PUT)
-    public void putUpdate(@PathVariable String username,
-                          @RequestBody User user,
-                          HttpServletRequest request) {
-        System.out
-                .println("Old: " + request.getContentType());
+    @RequestMapping(method = RequestMethod.PUT, consumes = "application/todo"
+                                                           + ".domain"
+                                                           + ".User+json")
+    public @ResponseBody void putUpdate(final @PathVariable String username,
+                          final @RequestBody User user,
+                          final HttpServletResponse response) {
+
+        if(userService.usernameExists(username)){
+            userService.updateUser(user);
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
+
 
     }
 
@@ -113,8 +97,10 @@ public class SpecificUserController {
     @RequestMapping(method = RequestMethod.DELETE)
     public
     @ResponseBody
-    void delete(@PathVariable String username) {
-        throw new UnsupportedOperationException();
+    void delete(final @PathVariable String username) {
+
+        userService.removeUserByUsername(username);
+
     }
 
 
