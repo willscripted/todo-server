@@ -18,9 +18,11 @@ import javax.servlet.http.HttpServletResponse;
  * @author Will O'Brien
  */
 @Controller
-@RequestMapping("/api/users/{username}/")
-public final class SpecificUserController {
+public class SpecificUserController {
 
+    private static final String CLASS_REQUEST_MAPPING =
+            "/api/users/{username}/";
+    
     /**
      * UserService provides access to User resources.
      */
@@ -33,9 +35,11 @@ public final class SpecificUserController {
      * @param username Username of user entity.
      * @return User application/todo.domain.User+json - password censored
      */
-    @RequestMapping(method = RequestMethod.GET,
-                    produces = "application/todo.domain"
-                               + ".User+json")
+    @RequestMapping(
+            value = CLASS_REQUEST_MAPPING,
+            method = RequestMethod.GET,
+            produces = "application/todo.domain"
+                       + ".User+json")
     public
     @ResponseBody
     User get(final @PathVariable String username,
@@ -60,14 +64,18 @@ public final class SpecificUserController {
      *
      * @param username
      */
-    @RequestMapping(method = RequestMethod.PUT, consumes = "application/todo"
-                                                           + ".domain"
-                                                           + ".User+json")
-    public @ResponseBody void putUpdate(final @PathVariable String username,
-                          final @RequestBody User user,
-                          final HttpServletResponse response) {
+    @RequestMapping(value = CLASS_REQUEST_MAPPING,
+                    method = RequestMethod.PUT,
+                    consumes = "application/todo"
+                               + ".domain"
+                               + ".User+json")
+    public
+    @ResponseBody
+    void putUpdate(final @PathVariable String username,
+                   final @RequestBody User user,
+                   final HttpServletResponse response) {
 
-        if(userService.usernameExists(username)){
+        if (userService.usernameExists(username)) {
             userService.updateUser(user);
             response.setStatus(HttpServletResponse.SC_OK);
         } else {
@@ -82,7 +90,9 @@ public final class SpecificUserController {
      *
      * @param response set response status code to http method not allowed.
      */
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(
+            value = CLASS_REQUEST_MAPPING,
+            method = RequestMethod.POST)
     public
     @ResponseBody
     void post(HttpServletResponse response) {
@@ -94,7 +104,9 @@ public final class SpecificUserController {
      *
      * @param username String username to remove
      */
-    @RequestMapping(method = RequestMethod.DELETE)
+    @RequestMapping(value = CLASS_REQUEST_MAPPING,
+                    method = RequestMethod
+            .DELETE)
     public
     @ResponseBody
     void delete(final @PathVariable String username) {
