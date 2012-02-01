@@ -18,7 +18,7 @@ import java.util.HashMap;
  *
  * @author Will O'Brien
  */
-@Component
+@Component("hibernateCommandFactory")
 public class HibernateCommandFactory implements AbstractCommandFactory {
 
     /**
