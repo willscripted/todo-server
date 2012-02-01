@@ -37,4 +37,11 @@
         <put-attribute name="body" value="/WEB-INF/tiles/tos.jsp"/>
     </definition>
 
+    <definition name="humans.txt"
+                template="/static/humans.txt" />
+
+
+    <definition name="robots.txt"
+                template="/static/robots.txt" />
+
 </tiles-definitions>

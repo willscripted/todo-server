@@ -9,29 +9,48 @@ package todo.webapp.controllers.ui;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.view.tiles2.TilesView;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
+ *
+ * Serves static pages at root of host path.
+ *
  * @author Will O'Brien
  */
 @Controller
-public class RootViewsController {
+public final class RootViewsController {
 
     /**
      * Return index page.
      *
-     * @return ModelAndView Preped with data to support all displayed modules.
+     * @return ModelAndView Prepped with data to support all displayed modules.
      */
     @RequestMapping("")
-    public final String index() {
+    public String index() {
         return "base";
     }
 
     @RequestMapping("/tos")
-    public final ModelAndView termsOfService() {
+    public ModelAndView termsOfService(final HttpServletRequest request) {
+
         ModelAndView mav = new ModelAndView("tos");
-        mav.addObject("fromRegistration", true);
+
+        String referer = request.getHeader("referer");
+        if(referer.equals("/registration/")) {
+            mav.addObject("fromRegistration", true);
+        }
+
         return mav;
+    }
+
+    @RequestMapping("/humans.txt")
+    public String humansTxt() {
+        return "humans.txt";
+    }
+    
+    @RequestMapping("/robots.txt")
+    public String robotsTxt() {
+        return "robots.txt";
     }
 }
