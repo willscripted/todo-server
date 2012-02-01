@@ -24,7 +24,9 @@ import java.util.Set;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "findAllUsernames",
-                    query = "select u.username from User u")
+                    query = "select u.username from User u"),
+        @NamedQuery(name = "removeUserWithUsername",
+                    query = "delete from User u where u.username=:username")
               })
 @Table(name = "user")
 public class User implements Serializable {
