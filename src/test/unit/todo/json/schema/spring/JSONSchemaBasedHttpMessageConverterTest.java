@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -170,5 +171,16 @@ public class JSONSchemaBasedHttpMessageConverterTest {
         converter.read(CLAZZ,
                        message);
     }
+    
+    @Test
+    public void testParameterizedMediaTypeIsValid() {
 
+        MediaType charsetedMediaType = new MediaType(mediaType.getType(),
+                                                     mediaType.getSubtype(),
+                                                     Charset.forName("utf-8"));
+        
+        assertTrue(converter.canRead(this.CLAZZ, mediaType));
+        assertTrue(converter.canRead(this.CLAZZ, charsetedMediaType));
+    }
+    
 }

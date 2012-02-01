@@ -29,14 +29,14 @@ import java.util.Set;
  * @author Will O'Brien
  */
 public final class JSONSchemaBasedHttpMessageConverter implements
-                                                 HttpMessageConverter<Object> {
+                                                       HttpMessageConverter<Object> {
 
     /**
      * Map that contains information on how to convert from key1 to key2. If it
      * can be done, a schema will exist for value of k1 and
      * k2 in the map. Else null.
      */
-    private final MultiKeyMap convertionMap;
+    private final MultiKeyMap conversionMap;
 
     /**
      * MediaTypes that this converter can convert.
@@ -59,7 +59,7 @@ public final class JSONSchemaBasedHttpMessageConverter implements
      */
     public JSONSchemaBasedHttpMessageConverter() {
 
-        convertionMap = new MultiKeyMap();
+        conversionMap = new MultiKeyMap();
         mediaTypes = new HashSet<MediaType>();
 
         mapper = new ObjectMapper();
@@ -77,12 +77,25 @@ public final class JSONSchemaBasedHttpMessageConverter implements
     @Override
     public boolean canRead(Class<?> clazz, MediaType mediaType) {
 
+        MediaType keyMediaType = getMediaTypeKey(mediaType);
+        if (keyMediaType == null) {return false;}
+
         // Note: Schema for k1 (mediaType) -> k2 (clazz)
-        JSONSchema schema = (JSONSchema) convertionMap.get(mediaType,
+        JSONSchema schema = (JSONSchema) conversionMap.get(keyMediaType,
                                                            clazz);
 
         // If schema is not null, return true
         return (schema != null);
+    }
+
+    private MediaType getMediaTypeKey(MediaType mediaType) {
+        MediaType keyMediaType = new MediaType(mediaType.getType(),
+                                               mediaType.getSubtype());
+
+        // If created key is incompatible return null;
+        if (!keyMediaType.isCompatibleWith(mediaType)) {return null;}
+
+        return keyMediaType;
     }
 
     /**
@@ -97,7 +110,7 @@ public final class JSONSchemaBasedHttpMessageConverter implements
     public boolean canWrite(Class<?> clazz, MediaType mediaType) {
 
         // Note: Schema for k1 (mediatype) -> k2 (clazz)
-        JSONSchema schema = (JSONSchema) convertionMap.get(mediaType,
+        JSONSchema schema = (JSONSchema) conversionMap.get(mediaType,
                                                            clazz);
         // If schema is not null, return true
         return (schema != null);
@@ -120,10 +133,18 @@ public final class JSONSchemaBasedHttpMessageConverter implements
             throws IOException, HttpMessageNotReadableException {
 
         // Get schema to use
-        MediaType mediaType = inputMessage.getHeaders()
-                                          .getContentType();
-        JSONSchema schema = (JSONSchema) convertionMap.get(mediaType,
+        MediaType mediaTypeKey = getMediaTypeKey(inputMessage.getHeaders()
+                                                             .getContentType());
+
+        if(mediaTypeKey == null) {
+            throw new HttpMessageNotReadableException("Message with invalid "
+                                                      + "MediaType passed. Call "
+                                                      + "canRead first.");
+        }
+
+        JSONSchema schema = (JSONSchema) conversionMap.get(mediaTypeKey,
                                                            clazz);
+
         if (schema == null) {
             throw new HttpMessageNotReadableException("Message with invalid "
                                                       + "MediaType passed. Call "
@@ -207,7 +228,7 @@ public final class JSONSchemaBasedHttpMessageConverter implements
 
             JSONSchema schema = schemaProvider.getSchema(inputStream);
 
-            this.convertionMap
+            this.conversionMap
                     .put(mediaType,
                          configInstance.getClazz(),
                          schema);
