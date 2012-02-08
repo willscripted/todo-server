@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <name>todo-server</name>
     <groupId>co.dibit</groupId>
     <artifactId>todo-server</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -31,6 +32,14 @@
                 <version>1.1</version>
                 <configuration>
                     <path>/</path>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.sonar</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>2.13-RC2</version>
+                <configuration>
+                    <sonar.host.url>http://sonar.gsix.us:80</sonar.host.url>
                 </configuration>
             </plugin>
         </plugins>
@@ -210,7 +219,6 @@
             <scope>test</scope>
         </dependency>
 
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -230,6 +238,13 @@
             <artifactId>hsqldb</artifactId>
             <version>2.2.6</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <!-- DbUnit for DB testing -->
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>2.4.8</version>
         </dependency>
 
         <!-- Logging -->
@@ -306,7 +321,7 @@
 
         <!-- AsoectJ  -->
         <dependency>
-            <groupId>aspectj</groupId>
+            <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
             <version>1.5.4</version>
         </dependency>
@@ -355,7 +370,6 @@
             <name>Maven Central Compatible Spring Snapshot Repository</name>
             <url>http://maven.springframework.org/snapshot</url>
         </repository>
-
 
         <repository>
             <id>project.local</id>

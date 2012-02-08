@@ -18,46 +18,6 @@
     <!-- Configures the @Controller programming model -->
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">
-            <bean class="todo.json.schema.spring.JSONSchemaBasedHttpMessageConverter"
-                  id="jsonSchemaBasedHttpMessageConverter">
-                <property name="schemas">
-                    <set>
-                        <bean class="todo.json.schema.spring.SchemaConfigInstance">
-                            <constructor-arg index="0">
-                                <value>application/todo.domain.User+json</value>
-                            </constructor-arg>
-                            <constructor-arg index="1">
-                                <value>/static/json/schema/User.json</value>
-                            </constructor-arg>
-                            <constructor-arg index="2">
-                                <value>todo.domain.User</value>
-                            </constructor-arg>
-                        </bean>
-                        <bean class="todo.json.schema.spring.SchemaConfigInstance">
-                            <constructor-arg index="0">
-                                <value>application/todo.domain.Task+json</value>
-                            </constructor-arg>
-                            <constructor-arg index="1">
-                                <value>/static/json/schema/Task.json</value>
-                            </constructor-arg>
-                            <constructor-arg index="2">
-                                <value>todo.domain.Task</value>
-                            </constructor-arg>
-                        </bean>
-                        <bean class="todo.json.schema.spring.SchemaConfigInstance">
-                            <constructor-arg index="0">
-                                <value>application/todo.domain.RegistrationForm+json</value>
-                            </constructor-arg>
-                            <constructor-arg index="1">
-                                <value>/static/json/schema/RegistrationForm.json</value>
-                            </constructor-arg>
-                            <constructor-arg index="2">
-                                <value>todo.domain.RegistrationForm</value>
-                            </constructor-arg>
-                        </bean>
-                    </set>
-                </property>
-            </bean>
             <bean
                     class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
                 <property name="supportedMediaTypes" value="application/json"/>
@@ -89,9 +49,6 @@
         <property name="basename" value="/WEB-INF/messages/messages"/>
         <property name="cacheSeconds" value="0"/>
     </bean>
-
-    <!-- Resolves Exceptions -->
-    <bean class="todo.json.schema.spring.TodoHandlerExceptionResolver"/>
 
     <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
