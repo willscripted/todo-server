@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/api/tasks/")
-public class TasksController {
+public class RootController {
 
     /**
      * Get a list of all Tasks in the application.

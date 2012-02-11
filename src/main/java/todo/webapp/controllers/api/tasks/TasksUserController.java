@@ -17,8 +17,9 @@ import java.util.List;
  * @author Will O'Brien
  */
 @Controller
-@RequestMapping("/api/tasks/{username}")
-public class TasksOfUserController {
+public class TasksUserController {
+
+    private static final String CLASS_REQUEST_MAPPING = "/api/tasks/{username}";
 
     /**
      * GET - Retrieve a list of user's tasks
@@ -26,18 +27,24 @@ public class TasksOfUserController {
      * @param username String username of user whose tasks should be retrieved.
      * @return List<Task> application/json
      */
-    @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody List<Task> get(@PathVariable String username) {
+    @RequestMapping(value = CLASS_REQUEST_MAPPING,
+                    method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Task> get(@PathVariable String username) {
         throw new UnsupportedOperationException();
     }
 
     /**
      * PUT method not allowed on this resource.
-     * 
+     *
      * @param response Response - http status code method not allowed
      */
-    @RequestMapping(method = RequestMethod.PUT)
-    public @ResponseBody void put(HttpServletResponse response) {
+    @RequestMapping(value = CLASS_REQUEST_MAPPING,
+                    method = RequestMethod.PUT)
+    public
+    @ResponseBody
+    void put(HttpServletResponse response) {
         response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
 
@@ -47,24 +54,30 @@ public class TasksOfUserController {
      * @param username String username of user to create new task for.
      * @param task
      * @return Serializable id of new task if post is successful,
-     * else response with appropriate status code.
+     *         else response with appropriate status code.
      */
-    @RequestMapping(method = RequestMethod.POST)
-    public @ResponseBody Long post(@RequestBody Task task, 
-                                   @PathVariable String username,
-                                   HttpServletResponse response) {
+    @RequestMapping(value = CLASS_REQUEST_MAPPING,
+                    method = RequestMethod.POST)
+    public
+    @ResponseBody
+    Long post(@RequestBody Task task,
+              @PathVariable String username,
+              HttpServletResponse response) {
         throw new UnsupportedOperationException();
     }
 
     /**
      * DELETE - remove all tasks of user.
+     *
      * @param username
      */
-    @RequestMapping(method = RequestMethod.DELETE)
-    public @ResponseBody void delete(@PathVariable String username) {
+    @RequestMapping(value = CLASS_REQUEST_MAPPING,
+                    method = RequestMethod.DELETE)
+    public
+    @ResponseBody
+    void delete(@PathVariable String username) {
         throw new UnsupportedOperationException();
     }
 
 
-    
 }

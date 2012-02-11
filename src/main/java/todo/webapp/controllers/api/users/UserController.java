@@ -18,11 +18,11 @@ import javax.servlet.http.HttpServletResponse;
  * @author Will O'Brien
  */
 @Controller
-public class SpecificUserController {
+public class UserController {
 
     private static final String CLASS_REQUEST_MAPPING =
             "/api/users/{username}/";
-    
+
     /**
      * UserService provides access to User resources.
      */
@@ -65,10 +65,7 @@ public class SpecificUserController {
      * @param username
      */
     @RequestMapping(value = CLASS_REQUEST_MAPPING,
-                    method = RequestMethod.PUT,
-                    consumes = "application/todo"
-                               + ".domain"
-                               + ".User+json")
+                    method = RequestMethod.PUT)
     public
     @ResponseBody
     void putUpdate(final @PathVariable String username,
@@ -105,8 +102,7 @@ public class SpecificUserController {
      * @param username String username to remove
      */
     @RequestMapping(value = CLASS_REQUEST_MAPPING,
-                    method = RequestMethod
-            .DELETE)
+                    method = RequestMethod.DELETE)
     public
     @ResponseBody
     void delete(final @PathVariable String username) {

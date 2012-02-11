@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/api/tasks/{username}/current")
-public class CurrentTasksOfUserController {
+public class TasksUserCurrentController {
 
     /**
      * GET - Retrieve a list of the user's current tasks.

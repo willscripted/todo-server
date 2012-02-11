@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import todo.domain.RegistrationForm;
+import todo.webapp.dto.RegistrationForm;
 import todo.domain.User;
 import todo.services.UserService;
 
@@ -22,79 +22,78 @@ import java.util.Date;
  * @author Will O'Brien
  */
 @Controller
-@RequestMapping("/api/users/")
-public final class UserResourceController {
+public class RootController {
+
+    private static final String CLASS_REQUEST_MAPPING = "/api/users/";
 
     /**
      * Service for accessing User resources.
      */
     @Autowired
     private UserService userService;
-    
+
     /**
      * Returns a collection of all the usernames in the application.
+     *
      * @return Collection<String>
      */
-    @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody Collection<String> getUsers() {
+    @RequestMapping(value = CLASS_REQUEST_MAPPING,
+                    method = RequestMethod.GET)
+    public
+    @ResponseBody
+    Collection<String> getUsers() {
 
         return userService.getUsernames();
-        
+
     }
 
     /**
      * Create a new User from data contained in the RegistrationForm.
      * If username is taken, a status code 400 - Bad Request is sent.
      *
-     * @param username Desired username.
-     * @param form Valid RegistrationForm
+     * @param form     Valid RegistrationForm
      * @param response HttpServletResponse
      */
-    @RequestMapping(method = RequestMethod.POST,
-                    consumes = "application/todo.domain.RegistrationForm+json")
+    @RequestMapping(value = CLASS_REQUEST_MAPPING,
+                    method = RequestMethod.POST,
+                    consumes = "application/todo.webapp.dto.RegistrationForm+json")
     public
     @ResponseBody
-    void registerUsername(final @PathVariable String username,
-                          final @RequestBody RegistrationForm form,
-                          final HttpServletResponse response) {
+    String registerUsername(final @RequestBody RegistrationForm form,
+                          final HttpServletResponse response)
+            throws IOException {
 
-        // If user exists, throw bad request
-        if (userService.usernameExists(username)) {
+        String username = userService.createUser(form);
 
-            try {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-                                   "Username taken");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (username == null) {
 
-        }
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                               "Username \'"
+                               + form.getUsername()
+                               + "\' taken");
+            return null;
 
-        // Else create new user
-        else {
-
-            User user = new User();
-            user.setCreated(new Date());
-            user.setPassword(form.getPassword());
-            user.setEmail(form.getEmail());
-            user.setUsername(form.getUsername());
-
-            userService.createUser(user);
+        } else {
 
             response.setStatus(HttpServletResponse.SC_CREATED);
-        }
+            return username;
 
+        }
     }
 
 
     /**
      * PUT and DELETE return a response with status code 405 - unsupported
      * operation.
+     *
      * @param response Response to return.
      */
-    @RequestMapping(method = {RequestMethod.PUT,
-                            RequestMethod.DELETE} )
-    public @ResponseBody void unsupported(final HttpServletResponse response) {
+    @RequestMapping(value = CLASS_REQUEST_MAPPING,
+                    method = {RequestMethod.PUT,
+                              RequestMethod.DELETE})
+    public
+    @ResponseBody
+    void unsupported(final HttpServletResponse response) {
         response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
 

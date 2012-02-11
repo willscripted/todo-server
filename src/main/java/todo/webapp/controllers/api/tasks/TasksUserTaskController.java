@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/api/tasks/{username}/{taskId}")
-public class TaskInstanceOfUserController {
+public class TasksUserTaskController {
 
     /**
      * Retrieve a task of a user.

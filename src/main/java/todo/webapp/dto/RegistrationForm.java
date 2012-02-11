@@ -1,4 +1,4 @@
-package todo.domain;
+package todo.webapp.dto;
 
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
