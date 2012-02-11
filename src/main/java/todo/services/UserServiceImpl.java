@@ -3,18 +3,16 @@ package todo.services;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.CriteriaQuery;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import todo.domain.User;
 import todo.persistence.UserDao;
 import todo.security.authority.impl.SiteNotary;
+import todo.webapp.dto.RegistrationForm;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -91,29 +89,13 @@ public final class UserServiceImpl implements UserService {
 
     }
 
-    @Override
-    public final Serializable createUser(final User user) {
-        addDefaultAuthorities(user);
-
-        user.setCreated(new Date());
-        encodeNewUsersPassword(user);
-
-        Serializable id = createUserTransaction(user);
-
-        if (id == null) {
-            throw new IllegalArgumentException("Username already exists");
-        }
-
-        return id;
-    }
-
     /**
      * Encode the user's raw password using the application's encoding method.
      * Set the user's password to the new, encoded, password.
      *
      * @param user User with raw password set.
      */
-    private void encodeNewUsersPassword(User user) {
+    private void encodeUsersPassword(User user) {
         if (user.getPassword() == null) { throw new IllegalArgumentException();}
 
         String encodedPassword = encoder.encodePassword(user.getPassword(),
@@ -176,20 +158,29 @@ public final class UserServiceImpl implements UserService {
 
         user.setPassword(newPassword);
 
-        encodeNewUsersPassword(user);
+        encodeUsersPassword(user);
     }
 
     /**
      * Transaction for creating a user.
      *
-     * @param user User to add, as is.
-     * @return Serializable id of the new user.
+     * @param form RegistrationForm to create user from.
+     * @return Serializable id of the new user or null if username is taken.
      */
-    @Transactional(propagation = Propagation.REQUIRED)
-    private Serializable createUserTransaction(User user) {
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public String createUser(RegistrationForm form) {
+
         // If username does not exist, add the new user
-        if (!usernameExists(user.getUsername())) {
-            return userDao.add(user);
+        if (!usernameExists(form.getUsername())) {
+
+            User user = form.getUser();
+            addDefaultAuthorities(user);
+            encodeUsersPassword(user);
+
+            userDao.add(user);
+
+            return user.getUsername();
         }
 
         return null;

@@ -1,6 +1,9 @@
 package todo.services;
 
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import todo.domain.User;
+import todo.webapp.dto.RegistrationForm;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -34,16 +37,16 @@ public interface UserService {
      */
     User getUserByUsername(String username);
 
-    /**
-     * Create a new user. User's password should be raw. By default,
-     * new users are not enabled but possess the default application
-     * authorities.
-     *
-     * @param user User object describing the new user to create.
-     * @return Serializable key for user.
-     * @see todo.security.authority.impl.SiteNotary
-     */
-    Serializable createUser(User user);
+//    /**
+//     * Create a new user. User's password should be raw. By default,
+//     * new users are not enabled but possess the default application
+//     * authorities.
+//     *
+//     * @param user User object describing the new user to create.
+//     * @return Serializable key for user.
+//     * @see todo.security.authority.impl.SiteNotary
+//     */
+//    Serializable createUser(User user);
 
     /**
      * Get a list of all usernames in use.
@@ -72,4 +75,17 @@ public interface UserService {
      */
     void changePassword(String username,
                         String newPassword);
+
+
+    /**
+     * Create a new user from form if username is available.
+     *
+     * The new user will have the default permissions.
+     *
+     * @param form RegistrationForm
+     * @return String username
+     * @see todo.security.authority.impl.SiteNotary
+     */
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    String createUser(RegistrationForm form);
 }
