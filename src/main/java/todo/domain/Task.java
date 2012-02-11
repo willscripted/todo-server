@@ -17,8 +17,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -28,23 +28,9 @@ import java.io.Serializable;
  */
 @Entity
 @NamedQueries({
-                      @NamedQuery(name = "findCurrentTasks",
+                      @NamedQuery(name = "findIncompleteTasks",
                                   query = "from Task t where t.complete = "
-                                          + "false and t.cur= true"),
-                      @NamedQuery(name = "findPendingTasks",
-                                  query = "from Task t where t.complete = "
-                                          + "false and t.cur = false"),
-                      @NamedQuery(name = "countCurrent",
-                                  query = "select count(*) from Task t where "
-                                          + "t.cur = true and t.complete = "
-                                          + "false"),
-                      @NamedQuery(name = "countPending",
-                                  query = "select count(*) from Task t where "
-                                          + "t.cur = false and t.complete = "
-                                          + "false"),
-                      @NamedQuery(name = "countOutstanding",
-                                  query = "select count(*) from Task t where "
-                                          + "t.complete = false")
+                                          + "false and t.user = :user")
               })
 @Table(name = "task")
 public class Task implements Serializable {
@@ -63,30 +49,17 @@ public class Task implements Serializable {
     @Lob
     private String description;
 
-    // Timing
-    private Long estTime; // in milliseconds
-    private Long timeSpent; // in milliseconds
-
     // Completed
     private boolean complete;
-    private boolean cur;
 
-    // Vars that affect points
-    private int priority;
-
-    @Column(nullable = false)
+    @ManyToOne(optional = false)
     private User user;
 
 
     public Task() {
         this.complete = false;
-        this.cur = false;
         this.description = "";
-        this.estTime = -1L;
-        this.priority = 10;
-        this.timeSpent = 0L;
         this.title = "";
-
     }
 
     public User getUser() {
@@ -105,14 +78,6 @@ public class Task implements Serializable {
         this.description = description;
     }
 
-    public Long getEstTime() {
-        return estTime;
-    }
-
-    public void setEstTime(Long estTime) {
-        this.estTime = estTime;
-    }
-
     public Long getId() {
         return id;
     }
@@ -121,36 +86,12 @@ public class Task implements Serializable {
         this.id = id;
     }
 
-    public boolean isCur() {
-        return cur;
-    }
-
-    public void setCur(boolean cur) {
-        this.cur = cur;
-    }
-
     public boolean isComplete() {
         return complete;
     }
 
     public void setComplete(boolean complete) {
         this.complete = complete;
-    }
-
-    public int getPriority() {
-        return priority;
-    }
-
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
-
-    public Long getTimeSpent() {
-        return timeSpent;
-    }
-
-    public void setTimeSpent(Long timeSpent) {
-        this.timeSpent = timeSpent;
     }
 
     public String getTitle() {

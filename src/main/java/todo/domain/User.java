@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,10 +37,19 @@ public class User implements Serializable {
     @GenericGenerator(name = "increment",
                       strategy = "increment")
     private Long id;
+
+    @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private long created;
+
     private boolean enabled;
 
     @ElementCollection
@@ -50,6 +60,9 @@ public class User implements Serializable {
     }
 
     public void setEmail(String email) {
+        if(email == null) {
+            throw new IllegalArgumentException();
+        }
         this.email = email;
     }
 
@@ -66,6 +79,9 @@ public class User implements Serializable {
     }
 
     public void setCreated(Date created) {
+        if(created == null) {
+            throw new IllegalArgumentException();
+        }
         this.created = created.getTime();
     }
 
@@ -74,14 +90,23 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
+
+        if(password == null) {
+            throw new IllegalArgumentException();
+        }
         this.password = password;
     }
 
     public String getUsername() {
+
         return username;
     }
 
     public void setUsername(String username) {
+
+        if(username == null) {
+            throw new IllegalArgumentException();
+        }
         this.username = username;
     }
 
@@ -99,6 +124,10 @@ public class User implements Serializable {
     }
 
     public void setId(Long id) {
+
+        if(id == null) {
+            throw new IllegalArgumentException();
+        }
         this.id = id;
     }
 

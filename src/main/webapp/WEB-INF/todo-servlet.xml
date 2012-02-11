@@ -54,6 +54,11 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
     </bean>
 
+    <bean class="org.dozer.spring.DozerBeanMapperFactoryBean">
+        <property name="mappingFiles"
+                  value="classpath:/todo/webapp/dto/dozer-mapping.xml" />
+    </bean>
+
     <import resource="persistence-config.xml"/>
 
 </beans>

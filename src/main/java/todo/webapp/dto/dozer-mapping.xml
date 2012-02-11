@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+    <configuration>
+        <stop-on-errors>true</stop-on-errors>
+        <wildcard>true</wildcard>
+
+        <custom-converters>
+            <converter type="todo.webapp.dto.converters.UserConverter">
+                <class-a>todo.domain.User</class-a>
+                <class-b>java.lang.Long</class-b>
+            </converter>
+        </custom-converters>
+
+
+    </configuration>
+
+    <mapping>
+        <class-a>todo.domain.Task</class-a>
+        <class-b>todo.webapp.dto.TaskDTO</class-b>
+        <field>
+            <a>user</a>
+            <b>userId</b>
+        </field>
+    </mapping>
+
+
+</mappings>
