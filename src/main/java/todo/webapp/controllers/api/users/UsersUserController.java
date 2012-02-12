@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Will O'Brien
  */
 @Controller
-public class UserController {
+public class UsersUserController {
 
     private static final String CLASS_REQUEST_MAPPING =
             "/api/users/{username}/";

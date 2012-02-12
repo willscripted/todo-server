@@ -20,15 +20,17 @@ import java.util.List;
  * @author Will O'Brien
  */
 @Controller
-@RequestMapping("/api/tasks/")
-public class RootController {
+public class TasksRootController {
+    
+    private static final String RESOURCE_URI = "/api/tasks/";
 
     /**
      * Get a list of all Tasks in the application.
      *
      * @return List<Task> list of all tasks in the app.
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = RESOURCE_URI,
+                    method = RequestMethod.GET)
     public List<Task> get() {
         throw new UnsupportedOperationException();
     }
@@ -38,10 +40,11 @@ public class RootController {
      *
      * @param response Http method not allowed response.
      */
-    @RequestMapping(method = {RequestMethod.PUT,
+    @RequestMapping(value = RESOURCE_URI,
+                    method = {RequestMethod.PUT,
                               RequestMethod.POST,
                               RequestMethod.DELETE})
-    public @ResponseBody void post(HttpServletResponse response) {
+    public @ResponseBody void unsupported(HttpServletResponse response) {
         response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
 

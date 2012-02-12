@@ -19,48 +19,48 @@ import static org.easymock.EasyMock.verify;
 /**
  *
  */
-public class RootControllerURIMappingTest
-        extends URIMappingTest<RootController> {
+public class UsersRootControllerURIMappingTest
+        extends URIMappingTest<UsersRootController> {
 
     private static final String RESOURCE_URI = "/api/users/";
 
-    private RootController mockController;
-
-    public RootControllerURIMappingTest() {
-        super(RootController.class);
-    }
 
     @Before
     public void setUp() throws Exception {
         super.setUp();
 
-        {
-            // Set media types
-            List<MediaType> types = new ArrayList<MediaType>();
-            types.add(new MediaType("application",
-                                    "todo.webapp.dto.RegistrationForm+json"));
-            setSupportedMediaTypes(types);
-        }
-
-        mockController = getMockController();
-
         request.setRequestURI(RESOURCE_URI);
+    }
+
+    @Override
+    protected Class getT() {
+        return UsersRootController.class;
+    }
+
+    @Override
+    protected List<MediaType> getSupportedMediaTypes() {
+        ArrayList<MediaType> mediaTypes = new ArrayList<MediaType>();
+        mediaTypes.add(new MediaType("application",
+                                     "todo.webapp.dto"
+                                     + ".RegistrationForm"
+                                     + "+json"));
+        return mediaTypes;
     }
 
     @After
     public void tearDown() throws Exception {
-        replay(mockController);
+        replay(controller);
 
         handle();
 
-        verify(mockController);
+        verify(controller);
     }
 
     @Test
     public void testGet() throws Exception {
         request.setMethod("GET");
 
-        expect(mockController.getUsers()).andReturn(null);
+        expect(controller.getUsers()).andReturn(null);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class RootControllerURIMappingTest
         request.setContentType("application/todo.webapp.dto"
                                + ".RegistrationForm+json");
 
-        expect(mockController.registerUsername(anyObject(RegistrationForm.class),
+        expect(controller.registerUsername(anyObject(RegistrationForm.class),
                                                anyObject(HttpServletResponse.class))
         ).andReturn("");
     }
@@ -78,13 +78,13 @@ public class RootControllerURIMappingTest
     public void testPut() throws Exception {
         request.setMethod("PUT");
 
-        mockController.unsupported(anyObject(HttpServletResponse.class));
+        controller.unsupported(anyObject(HttpServletResponse.class));
     }
 
     @Test
     public void testDelete() throws Exception {
         request.setMethod("DELETE");
 
-        mockController.unsupported(anyObject(HttpServletResponse.class));
+        controller.unsupported(anyObject(HttpServletResponse.class));
     }
 }

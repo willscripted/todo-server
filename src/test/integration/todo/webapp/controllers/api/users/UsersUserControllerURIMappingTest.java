@@ -22,40 +22,41 @@ import java.util.List;
 /**
  * Assert correct handling methods of controller are being executed.
  */
-public class UserControllerURIMappingTest
-        extends URIMappingTest<UserController> {
+public class UsersUserControllerURIMappingTest
+        extends URIMappingTest<UsersUserController> {
 
     private static final String RESOURCE_URI = "/api/users/joe/";
-    
-    private UserController mockController;
 
-    public UserControllerURIMappingTest() {
-        super(UserController.class);
-    }
 
     @Before
     public void setUp() throws Exception {
         super.setUp();
 
-        { // Set media types
-            List<MediaType> types = new ArrayList<MediaType>();
-            types.add(new MediaType("application",
-                                    "todo.domain.User+json"));
-            setSupportedMediaTypes(types);
-        }
-
-        mockController = getMockController();
-        
         request.setRequestURI(RESOURCE_URI);
+    }
+
+    @Override
+    protected Class getT() {
+        return UsersUserController.class;
+    }
+
+    @Override
+    protected List<MediaType> getSupportedMediaTypes() {
+        List<MediaType> types = new ArrayList<MediaType>();
+        types.add(new MediaType("application",
+                                "todo.webapp.dto"
+                                + ".RegistrationForm"
+                                + "+json"));
+        return types;
     }
 
     @After
     public void after() throws Exception {
-        replay(mockController);
+        replay(controller);
         
         handle();
         
-        verify(mockController);
+        verify(controller);
     }
 
     @Test
@@ -66,7 +67,7 @@ public class UserControllerURIMappingTest
                           "application/todo.domain.User+json");
 
         // Set expected behavior
-        expect(mockController.get("joe",
+        expect(controller.get("joe",
                                   response)).andReturn(null);
     }
 
@@ -77,7 +78,7 @@ public class UserControllerURIMappingTest
         request.setContentType("application/todo.domain.User+json");
 
         // Program mock
-        mockController.putUpdate(eq("joe"),
+        controller.putUpdate(eq("joe"),
                                  isNull(User.class),
                                  anyObject(HttpServletResponse.class));
     }
@@ -86,13 +87,13 @@ public class UserControllerURIMappingTest
     public void testPost() throws Exception {
         request.setMethod("POST");
 
-        mockController.post(response);
+        controller.post(response);
     }
 
     @Test
     public void testDelete() throws Exception {
         request.setMethod("DELETE");
 
-        mockController.delete("joe");
+        controller.delete("joe");
     }
 }

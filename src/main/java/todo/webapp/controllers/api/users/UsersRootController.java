@@ -22,7 +22,7 @@ import java.util.Date;
  * @author Will O'Brien
  */
 @Controller
-public class RootController {
+public class UsersRootController {
 
     private static final String CLASS_REQUEST_MAPPING = "/api/users/";
 
