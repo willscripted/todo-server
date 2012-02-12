@@ -12,7 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import todo.domain.Task;
 import todo.domain.User;
 
+import java.util.Date;
+
 import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -48,9 +52,12 @@ public class HibernateAddCommandTest {
     public void testExecute() throws Exception {
 
         // Create entity / args
-        Task task = new Task();
-        task.setUser(createMock(User.class));
-        Object[] args = new Object[]{task};
+        User user = new User();
+        user.setCreated(new Date());
+        user.setEmail("someEmail");
+        user.setUsername("username");
+        user.setPassword("password");
+        Object[] args = new Object[]{user};
 
         command.execute(null,
                         args);
@@ -62,25 +69,33 @@ public class HibernateAddCommandTest {
     public void testExecute_taskIdAlreadyInUse() throws Exception {
         Long id = 500L;
         {
-            Task task = new Task();
-            task.setUser(createMock(User.class));
+            User user = new User();
+            user.setCreated(new Date());
+            user.setEmail("someEmail");
+            user.setUsername("username");
+            user.setPassword("password");
 
-            Object[] args = new Object[]{task};
-            task.setId(id);
+            Object[] args = new Object[]{user};
+            user.setId(id);
             command.execute(null,
                             args);
         }
 
         {
-            Task task = new Task();
-            task.setUser(createMock(User.class));
 
-            Object[] args = new Object[]{task};
-            task.setId(id);
+            User user = new User();
+            user.setCreated(new Date());
+            user.setEmail("someEmail");
+            user.setUsername("username");
+            user.setPassword("password");
+
+
+            Object[] args = new Object[]{user};
+            user.setId(id);
             command.execute(null,
                             args);
 
-            assertFalse(task.getId()
+            assertFalse(user.getId()
                             .equals(id));
         }
 

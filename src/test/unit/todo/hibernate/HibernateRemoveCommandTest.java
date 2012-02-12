@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import todo.domain.Task;
 import todo.domain.User;
 
+import java.util.Date;
+
 import static org.easymock.EasyMock.createMock;
 
 /**
@@ -38,11 +40,14 @@ public class HibernateRemoveCommandTest {
     @Transactional
     public void testExecute() throws Exception {
 
-        Task task = new Task();
-        task.setUser(createMock(User.class));
-        task.setId(3L);
+        User user = new User();
+        user.setPassword("");
+        user.setUsername("");
+        user.setCreated(new Date());
+        user.setEmail("");
+        user.setId(3L);
         
-        Object[] args = new Object[] {task};
+        Object[] args = new Object[] {user};
 
         command.execute(null, args);
         
