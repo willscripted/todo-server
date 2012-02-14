@@ -61,9 +61,12 @@ http.createServer(
             // Get appropriate schema
             var schemaName = getTypeFromContentType(req.headers["content-type"]);
             var schema = schemaDictionary[schemaName];
+            console.log(schemaName);
+            console.log(schema);
 
             // If schema is not defined, return unsupported
             if (schema === undefined) {
+                console.log("Schema undefined!");
                 res.writeHead(415, {'Content-type':'application/json'});
                 res.end();
                 return;
@@ -73,9 +76,11 @@ http.createServer(
 
             // If entity is valid, send success
             if (report.errors.length === 0) {
+                console.log("Valid");
                 res.writeHead(200, {'Content-type':'application/json'});
                 res.end();
             } else {
+                console.log("Invalid");
                 // Else, send errors
                 res.writeHead(422, {'Content-type':'application/json'});
                 res.end(JSON.stringify(report.errors), "UTF-8");

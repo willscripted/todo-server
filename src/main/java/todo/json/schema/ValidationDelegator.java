@@ -42,8 +42,6 @@ public class ValidationDelegator implements Filter {
                          FilterChain chain)
             throws ServletException, IOException {
 
-        System.out
-                .println("Hit filter");
         String contentType = req.getContentType();
 
         if (contentType == null) {
@@ -56,8 +54,6 @@ public class ValidationDelegator implements Filter {
         if (jsonSchemaContentTypePattern.matcher(contentType)
                                         .matches()) {
 
-            System.out
-                    .println("Hit special handling");
 
             // Do special chain
             doJsonSchemaValidation(req,
@@ -65,8 +61,6 @@ public class ValidationDelegator implements Filter {
                                    chain);
 
         } else {
-            System.out
-                    .println("otherChain");
             chain.doFilter(req,
                            resp);
         }
@@ -92,6 +86,7 @@ public class ValidationDelegator implements Filter {
 
 
         if (connection.getResponseCode() == 200) {
+            System.out.println("Filter Passed!");
             chain.doFilter(wrapper,
                            resp);
         } else {

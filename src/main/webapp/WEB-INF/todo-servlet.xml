@@ -20,7 +20,14 @@
         <mvc:message-converters register-defaults="true">
             <bean
                     class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-                <property name="supportedMediaTypes" value="application/json"/>
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json</value>
+                        <value>application/todo.domain.Task+json</value>
+                        <value>application/todo.domain.User+json</value>
+                        <value>application/todo.webapp.dto.RegistrationForm+json</value>
+                    </list>
+                </property>
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
@@ -56,7 +63,7 @@
 
     <bean class="org.dozer.spring.DozerBeanMapperFactoryBean">
         <property name="mappingFiles"
-                  value="classpath:/todo/webapp/dto/dozer-mapping.xml" />
+                  value="classpath:/todo/webapp/dto/dozer-mapping.xml"/>
     </bean>
 
     <import resource="persistence-config.xml"/>

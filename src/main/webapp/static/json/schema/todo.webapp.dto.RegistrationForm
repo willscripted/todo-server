@@ -1,10 +1,6 @@
 {
     "type":"object",
     "properties":{
-        "agreeToTOS":{
-            "type":"string",
-            "enum":["true"]
-        },
         "username":{
             "type":"string",
             "minLength":3,

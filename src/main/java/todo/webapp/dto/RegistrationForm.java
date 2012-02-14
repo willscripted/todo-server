@@ -30,8 +30,6 @@ public class RegistrationForm {
 
     @Column(nullable = false, unique = true)
     private String sessionId;
-
-    private Boolean agreeToTOS;
     
     private String username;
     private String email;
@@ -60,14 +58,6 @@ public class RegistrationForm {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
-    }
-
-    public Boolean getAgreeToTOS() {
-        return agreeToTOS;
-    }
-
-    public void setAgreeToTOS(Boolean agreeToTOS) {
-        this.agreeToTOS = agreeToTOS;
     }
 
     public String getUsername() {
