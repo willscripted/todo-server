@@ -1,8 +1,8 @@
 {
   "properties": {
     "complete": {
-      "required": true,
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "description": {
       "type": "string"
@@ -13,11 +13,8 @@
     "title": {
       "type": "string",
       "required": true
-    },
-    "userId": {
-      "type": "number",
-      "required": true
     }
   },
-  "type": "object"
+  "type": "object",
+  "additionalProperties": false
 }

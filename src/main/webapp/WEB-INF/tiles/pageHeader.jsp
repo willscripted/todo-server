@@ -6,7 +6,8 @@
         <div id="logo">ToDo</div>
     </a>
 
-    <span id="slogan">The key to getting ahead is getting started.</span>
+    <span id="slogan">The secret of getting ahead is getting started. -
+        Mark Twain</span>
 
     <div id="login-status">
         <c:if test="${sessionScope['SPRING_SECURITY_CONTEXT'] != null}" >

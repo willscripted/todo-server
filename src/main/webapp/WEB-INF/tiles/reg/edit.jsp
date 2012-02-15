@@ -2,23 +2,25 @@
 <section>
 
     <script type="text/javascript">
-        dojo.require("dojox.form.Manager");
-        dojo.require("dojo/dom-form");
-        dojo.require("dojox.json.schema");
         dojo.require("dojox.validate");
         dojo.require("dojox.validate.web");
-        dojo.require("dojox.todo.Form");
+
+        dojo.registerModulePath("json", "../../json");
+        dojo.registerModulePath("todo", "../../todo");
+        dojo.require("json.schema.lib.validate");
+        dojo.require("todo.Form");
+
     </script>
 
-    <form data-dojo-type="dojox.form.Manager" id="createAccountForm"
+    <form id="createAccountForm"
           json-schema="/static/json/schema/todo.webapp.dto.RegistrationForm">
 
         <h1>Create Account</h1>
 
         <div class="clearfix">
             <label for="username">Username</label>
-            <input id="username" name="username" type="text" maxlength="25"
-                   observer="showValues" placeholder="Username" autofocus/>
+            <input id="username" name="username" type="text"
+                   maxlength="25" placeholder="Username" autofocus/>
 
             <div class="errors"></div>
         </div>
@@ -66,6 +68,9 @@
                 },
                 400:function () {
                     $("form input#username").siblings("div.errors").text("username taken");
+                },
+                201:function () {
+                    window.location = "/";
                 }
             }
 
@@ -91,7 +96,7 @@
                         message:"password must match"
                     }
                 },
-                {
+                { // TOS accepted
                     test:function () {
                         return $("form input#accept").is(":checked");
                     },

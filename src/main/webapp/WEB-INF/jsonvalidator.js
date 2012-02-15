@@ -1,6 +1,6 @@
 // Require package
 var fs = require('fs');
-var validate = require('commonjs-utils/json-schema').validate;
+var validate = require('../static/js/libs/json/schema/lib/validate.js').validate;
 var http = require('http');
 
 // Dictionary of json-schemas
@@ -17,6 +17,7 @@ for (var file in schemaDir) {
                                    "UTF-8");
     var key = schemaDir[file].toLowerCase();
     console.log(key);
+//    validateSchema(contents);
     schemaDictionary[key] = eval('(' + contents + ')');
 
 }
@@ -29,6 +30,23 @@ function getTypeFromContentType(contentType) {
     var match = entityTypeRegex.exec(contentType);
     return match[1].toLowerCase();
 }
+
+//function validateSchema(schema) {
+//    var contents = fs.readFileSync("schema", "UTF-8");
+//    console.log(contents);
+//    console.log(schema);
+//    var metaSchema = eval('(' + contents + ')');
+//
+//    var result = validate(schema, metaSchema);
+//    if(!result.valid) {
+//        console.log("invalid schema");
+//        for(error in result.errors) {
+//            console.log(JSON.stringify(result.errors[error]));
+//        }
+//        throw "Invalid Schema";
+//    }
+//}
+
 
 http.createServer(
     function (req, res) {
@@ -60,6 +78,9 @@ http.createServer(
 
             // Get appropriate schema
             var schemaName = getTypeFromContentType(req.headers["content-type"]);
+
+
+
             var schema = schemaDictionary[schemaName];
             console.log(schemaName);
             console.log(schema);

@@ -28,9 +28,12 @@ import java.io.Serializable;
  */
 @Entity
 @NamedQueries({
-                      @NamedQuery(name = "findIncompleteTasks",
+                      @NamedQuery(name = "findIncompleteTasksOfUser",
                                   query = "from Task t where t.complete = "
-                                          + "false and t.user = :user")
+                                          + "false and t.user.username = :username"),
+                      @NamedQuery(name = "findTasksOfUser",
+                                  query = "from Task t where "
+                                          + "t.user.username = :username")
               })
 @Table(name = "task")
 public class Task implements Serializable {
@@ -106,7 +109,8 @@ public class Task implements Serializable {
 
         ObjectMapper mapper = new ObjectMapper();
         JsonSchema schema = mapper.generateJsonSchema(Task.class);
-        System.out.println(schema.toString());
+        System.out
+                .println(schema.toString());
 
     }
 

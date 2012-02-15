@@ -47,8 +47,6 @@ public class ValidationDelegator implements Filter {
         if (contentType == null) {
             contentType = "";
         }
-        System.out
-                .println(req.getContentType());
 
         // If content (exists && ) type matches
         if (jsonSchemaContentTypePattern.matcher(contentType)
@@ -86,7 +84,6 @@ public class ValidationDelegator implements Filter {
 
 
         if (connection.getResponseCode() == 200) {
-            System.out.println("Filter Passed!");
             chain.doFilter(wrapper,
                            resp);
         } else {

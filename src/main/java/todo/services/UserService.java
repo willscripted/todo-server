@@ -37,17 +37,6 @@ public interface UserService {
      */
     User getUserByUsername(String username);
 
-//    /**
-//     * Create a new user. User's password should be raw. By default,
-//     * new users are not enabled but possess the default application
-//     * authorities.
-//     *
-//     * @param user User object describing the new user to create.
-//     * @return Serializable key for user.
-//     * @see todo.security.authority.impl.SiteNotary
-//     */
-//    Serializable createUser(User user);
-
     /**
      * Get a list of all usernames in use.
      * @return Collection<String> usernames.

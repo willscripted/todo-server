@@ -23,8 +23,8 @@
                 <property name="supportedMediaTypes">
                     <list>
                         <value>application/json</value>
-                        <value>application/todo.domain.Task+json</value>
                         <value>application/todo.domain.User+json</value>
+                        <value>application/todo.webapp.dto.TaskDTO+json</value>
                         <value>application/todo.webapp.dto.RegistrationForm+json</value>
                     </list>
                 </property>

@@ -1,6 +1,6 @@
 dojo.provide('todo.Form');
 
-require(['dojo/_base/declare'], function (declare) {
+require(['dojo/_base/declare', 'dojo/dom-form'], function (declare) {
     declare("todo.Form", null, {
         constructor:function (/*Object*/ args) {
 
@@ -80,7 +80,7 @@ require(['dojo/_base/declare'], function (declare) {
 
             var instance = dojo.formToJson(dojo.byId(this._id));
             var errors =
-                dojox.json.schema.validate(JSON.parse(instance),
+                json.schema.lib.validate(JSON.parse(instance),
                                            this._schema).errors;
 
             for (error in errors) {
@@ -94,6 +94,11 @@ require(['dojo/_base/declare'], function (declare) {
 
         _setError:function (error) {
             var errorDiv = $("#" + error.property).siblings("div.errors");
+
+            if(errorDiv.length === 0) {
+                console.log("Undisplayed Error - Property: " + error.property + " Message: " + error.message);
+            }
+
             errorDiv.text(error.message);
         },
 
