@@ -42,4 +42,11 @@ public interface TaskService {
      * @param id Long id of task.
      */
     void removeTask(Long id);
+
+    /**
+     * Retrieve the task with id.
+     * @param id Long id of task.
+     * @return Task specified or null if not exists.
+     */
+    Task getTask(Long id);
 }

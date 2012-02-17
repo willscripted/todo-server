@@ -44,4 +44,8 @@
     <definition name="robots.txt"
                 template="/static/robots.txt" />
 
+    <definition name="test" extends="base">
+        <put-attribute name="body" value="/WEB-INF/tiles/test.jsp" />
+    </definition>
+
 </tiles-definitions>

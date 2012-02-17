@@ -20,7 +20,6 @@
 
         <mapping class="todo.domain.Task" />
         <mapping class="todo.domain.User" />
-        <mapping class="todo.webapp.dto.RegistrationForm" />
 
 
     </session-factory>

@@ -30,6 +30,11 @@ public final class RootViewsController {
     public String index() {
         return "base";
     }
+    
+    @RequestMapping("/test")
+    public String test() {
+        return "test";
+    }
 
     @RequestMapping("/tos")
     public ModelAndView termsOfService(final HttpServletRequest request) {

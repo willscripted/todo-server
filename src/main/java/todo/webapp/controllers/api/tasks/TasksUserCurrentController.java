@@ -1,5 +1,7 @@
 package todo.webapp.controllers.api.tasks;
 
+import org.dozer.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import todo.domain.Task;
+import todo.services.TaskService;
+import todo.webapp.dto.TaskDTO;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,6 +26,12 @@ import java.util.List;
 @RequestMapping("/api/tasks/{username}/current")
 public class TasksUserCurrentController {
 
+    @Autowired
+    private TaskService taskService;
+    
+    @Autowired
+    private Mapper mapper;
+    
     /**
      * GET - Retrieve a list of the user's current tasks.
      *
@@ -29,8 +40,18 @@ public class TasksUserCurrentController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
-    List<Task> get(@PathVariable String username) {
-        throw new UnsupportedOperationException();
+    List<TaskDTO> get(@PathVariable String username) {
+
+        Collection<Task> currentTasksOfUser =
+                taskService.getCurrentTasksOfUser(username);
+
+        List<TaskDTO> tasks = new ArrayList<TaskDTO>(currentTasksOfUser.size
+                ());
+        for(Task t : currentTasksOfUser) {
+            TaskDTO task = mapper.map(t, TaskDTO.class);
+            tasks.add(task);
+        }
+        return tasks;
     }
 
     /**

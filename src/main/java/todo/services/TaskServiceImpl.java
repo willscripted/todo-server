@@ -44,6 +44,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public Collection<Task> getCurrentTasksOfUser(String username) {
         Session session = sessionFactory.getCurrentSession();
         Query findIncompleteTasks =
@@ -66,5 +67,11 @@ public class TaskServiceImpl implements TaskService {
             taskDao.remove(task);
         }
 
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Task getTask(Long id) {
+        return taskDao.findByPrimaryKey(id);
     }
 }
