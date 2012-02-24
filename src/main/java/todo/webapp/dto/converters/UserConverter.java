@@ -4,7 +4,6 @@ import org.dozer.CustomConverter;
 import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import todo.domain.User;
-import todo.persistence.UserDao;
 import todo.services.UserService;
 
 /**

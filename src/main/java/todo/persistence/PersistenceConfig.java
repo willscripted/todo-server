@@ -7,6 +7,7 @@
 package todo.persistence;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -21,8 +22,9 @@ import java.lang.reflect.Proxy;
  * @author Will O'Brien
  */
 @Configuration()
-public class PersistenceConfig implements ApplicationContextAware {
+public class PersistenceConfig {
 
+    @Autowired
     private DaoInvocationHandler hibernateHandler;
 
     @Bean
@@ -53,10 +55,4 @@ public class PersistenceConfig implements ApplicationContextAware {
 
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext)
-            throws BeansException {
-        this.hibernateHandler = applicationContext.getBean
-                (DaoInvocationHandler.class);
-    }
 }
