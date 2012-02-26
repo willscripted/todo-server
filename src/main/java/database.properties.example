@@ -1,4 +1,0 @@
-jdbc.url=jdbc:mysql://localhost:3306/todoDev
-jdbc.driverClassName=com.mysql.jdbc.Driver
-jdbc.username=myusername
-jdbc.password=S3cr3tPassw0rd
