@@ -2,15 +2,18 @@
 define(["dojo/_base/declare", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/text!./templates/TaskRowWidget.html", "dojo/_base/connect"],
        function (declare, WidgetBase, TemplatedMixin, template, connect) {
            return declare([WidgetBase, TemplatedMixin], {
-               title:"\<\<Untitled!\>\>",
+               title:"Untitled",
                templateString:template,
                baseClass:"taskRowWidget",
                objectStore: null,
                _deleteTask: function () {
                     console.log("Deleting Task...");
+                   this.objectStore.remove(this.task.id);
                },
                _markCompleted: function() {
                     console.log("Marking Task completed...");
+                   this.task.complete = true;
+                   this.objectStore.put(this.task);
                },
                constructor: function(params, srcNodeRef) {
                    this.task = params['item'];

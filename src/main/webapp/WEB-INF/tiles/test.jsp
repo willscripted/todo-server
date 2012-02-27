@@ -5,69 +5,48 @@
 
     <script type="text/javascript">
 
+        dojo.registerModulePath("json", "../../json");
         dojo.registerModulePath("todo", "../../todo");
 
 
         require(["todo/widgets/TaskListWidget/TaskListWidget",
-                    "dojo/store/JsonRest",
+                    "todo/store/JsonSchemaRest",
                     "dojo/store/Memory",
                     "dojo/query",
                     "dojo/_base/array",
                     "dojo/store/Cache", "dojo/behavior",
+                "dojo/store/Observable",
                     "dojo/domReady!"],
-                function (TaskListWidget, JsonRest, Memory, Query, array,
+                function (TaskListWidget, JsonSchemaRest, Memory, Query, array,
                           Cache,
-                          behavior) {
+                          behavior, Observable) {
 
-//                    var myBehavior = {
-//                        // all <a class="noclick"></a> nodes:
-//                        "td.complete":{
-//                            // event names become event connections:
-//                            onclick:function (e) {
-//                                e.preventDefault();
-//                                // stop the default event handler
-//                                console.log('clicked! ', e.target);
-//                            }
-//                        },
-//                        // all <span> nodes
-//                        "td.remove":{
-//                            // for each:
-//                            onclick:function (n) {
-//                                console.log('found', n);
-//                            }
-//                        }
-//                    };
-//                    behavior.add(myBehavior);
+                    $.ajax("/static/json/schema/todo.webapp.dto.TaskDTO", {
+                                    dataType:"json",
+                                    success:function (schema) {
+
+                                        var schema = schema;
+                                        var contentType =
+                                                "application/todo.webapp.dto.TaskDTO+json";
+
+                                        masterStore =
+                                        Observable(JsonSchemaRest(schema,
+                                                                  contentType,
+                                                                  {target:"/api/tasks/<sec:authentication property="principal.username" />/current/"}));
+
+                                        cachedStore = Cache(
+                                                masterStore,
+                                                Memory()
+                                        );
 
 
-                    // Get Data
-                    myStore = Cache(
-                            JsonRest({target:"/api/tasks/<sec:authentication property="principal.username" />/current/"}),
-                            Memory()
-                    );
+                                        // Get a reference to our container
+                                        var taskContainer = dojo.byId("taskListHolder");
 
-                    var q = myStore.query({});
-
-                    // Get a reference to our container
-                    var taskContainer = dojo.byId("taskListHolder");
-
-                    var widget =
-                            new TaskListWidget({query:q, store: myStore}).placeAt(taskContainer);
-
-//                    widget.get("query").forEach(function(thing) {
-//                       console.log(thing);
-//                    });
-
-//
-//                    // Code to create widget pieces
-//                    var createThing = function (thing) {
-//                        var widget = new TaskListWidget(thing).placeAt(taskContainer);
-//
-//                    }
-//
-//                    q.forEach(createThing).then(function () {
-////                        behavior.apply();
-//                    });
+                                        var widget =
+                                                new TaskListWidget({store: cachedStore}).placeAt(taskContainer);
+                                    }
+                                });
 
                 });
 

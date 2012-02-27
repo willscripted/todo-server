@@ -1,6 +1,6 @@
 dojo.provide('todo.Form');
 
-require(['dojo/_base/declare', 'dojo/dom-form'], function (declare) {
+require(['dojo/_base/declare', 'dojo/dom-form', 'json/schema/lib/validate'], function (declare) {
     declare("todo.Form", null, {
         constructor:function (/*Object*/ args) {
 
