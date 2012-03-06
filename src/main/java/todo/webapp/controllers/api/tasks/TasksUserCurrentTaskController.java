@@ -3,6 +3,7 @@ package todo.webapp.controllers.api.tasks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,8 +13,6 @@ import todo.webapp.dto.TaskDTO;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
 
 /**
  *
@@ -28,6 +27,9 @@ public class TasksUserCurrentTaskController {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private TasksUserTaskController tasksUserTaskController;
+
     @RequestMapping(value = CLASS_REQUEST_MAPPING,
                     method = RequestMethod.GET)
     public
@@ -41,13 +43,12 @@ public class TasksUserCurrentTaskController {
     }
 
     @RequestMapping(value = CLASS_REQUEST_MAPPING,
-                    method = RequestMethod.PUT)
-    public void put(@PathVariable Long id,
+                    method = RequestMethod.PUT,
+                    consumes = "application/todo.webapp.dto.TaskDTO+json")
+    public @ResponseBody void put(@PathVariable Long id,
                     @PathVariable String username,
-                    HttpServletResponse response) throws IOException {
-        response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-        response.setHeader("Location", "/api/tasks/" + username + "/" + id);
-
+                    @RequestBody TaskDTO taskDTO) {
+        tasksUserTaskController.put(id, username, taskDTO);
     }
 
     @RequestMapping(value = CLASS_REQUEST_MAPPING,

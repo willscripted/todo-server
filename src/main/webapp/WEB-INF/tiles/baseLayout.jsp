@@ -32,7 +32,7 @@
     <%--<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.1/dojo/dojo.js" type="text/javascript"></script>--%>
     <%--<script>window.dojo ||--%>
             <%--document.write('<script src="/static/js/libs/dojo-release-1.7.1/dojo/dojo.js"><\/script>')</script>--%>
-    <script src="/static/js/libs/dojo171/dojo/dojo.js"></script>
+    <script src="/static/js/libs/dojo172/dojo/dojo.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/static/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 

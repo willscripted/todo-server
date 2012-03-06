@@ -88,11 +88,11 @@ public class TasksUserCurrentController {
                     consumes = "application/todo.webapp.dto.TaskDTO+json")
     public
     @ResponseBody
-    void post(@PathVariable String username,
+    Long post(@PathVariable String username,
               @RequestBody TaskDTO taskDTO,
               HttpServletResponse response) {
         taskDTO.setComplete(false);
-        tasksUserController.post(taskDTO, username, response);
+        return tasksUserController.post(taskDTO, username, response);
     }
 
     /**

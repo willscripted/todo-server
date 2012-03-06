@@ -44,7 +44,9 @@
                                         var taskContainer = dojo.byId("taskListHolder");
 
                                         var widget =
-                                                new TaskListWidget({store: cachedStore}).placeAt(taskContainer);
+                                                new TaskListWidget({store:
+                                                        masterStore}).placeAt(taskContainer);
+                                        widget.startup();
                                     }
                                 });
 
