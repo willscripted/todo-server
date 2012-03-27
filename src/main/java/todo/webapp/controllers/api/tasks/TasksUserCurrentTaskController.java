@@ -38,7 +38,7 @@ public class TasksUserCurrentTaskController {
              @PathVariable String username,
              HttpServletResponse response) throws IOException {
 
-        response.sendRedirect("/api/tasks/" + username + "/" + id);
+        tasksUserTaskController.get(id, username, response);
 
     }
 

@@ -6,13 +6,7 @@
 
         <h1>Hello</h1>
 
-        <p>
-            Looking for more than a basic registration / login system? Check
-            back
-            soon if you are on the web. Or if running this on your own system,
-            get
-            some updated source code!
-        </p>
+
 
         <p>
             To report a bug or send some feedback, <br/>

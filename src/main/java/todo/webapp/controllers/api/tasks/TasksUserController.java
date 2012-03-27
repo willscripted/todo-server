@@ -94,6 +94,7 @@ public class TasksUserController {
         Long id = taskService.addTask(task);
 
         response.setStatus(HttpServletResponse.SC_CREATED);
+        response.setHeader("Location", id.toString());
 
         return id;
     }

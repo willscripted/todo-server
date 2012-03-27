@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import todo.domain.Task;
+import todo.json.schema.ValidationDelegator;
 import todo.services.TaskService;
 import todo.webapp.dto.TaskDTO;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -36,6 +39,9 @@ public class TasksUserCurrentController {
 
     @Autowired
     private TasksUserController tasksUserController;
+
+    @Autowired
+    private ValidationDelegator jsonSchemaValidator;
 
     /**
      * GET - Retrieve a list of the user's current tasks.
@@ -85,12 +91,15 @@ public class TasksUserCurrentController {
      */
     @RequestMapping(value = CLASS_REQUEST_MAPPING,
                     method = RequestMethod.POST,
-                    consumes = "application/todo.webapp.dto.TaskDTO+json")
+                    consumes = {"application/todo.webapp.dto.TaskDTO+json",
+                            "application/json"})
     public
     @ResponseBody
     Long post(@PathVariable String username,
               @RequestBody TaskDTO taskDTO,
+              HttpServletRequest request,
               HttpServletResponse response) {
+
         taskDTO.setComplete(false);
         return tasksUserController.post(taskDTO, username, response);
     }

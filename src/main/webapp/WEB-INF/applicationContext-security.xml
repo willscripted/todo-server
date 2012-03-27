@@ -41,7 +41,8 @@
         <logout logout-url="/logout/" logout-success-url="/"/>
         <form-login
                 login-page="/login/"
-                authentication-failure-url="/login/invalid/"/>
+                authentication-failure-url="/login/invalid/"
+                default-target-url="/app/" />
     </http>
 
     <authentication-manager>
