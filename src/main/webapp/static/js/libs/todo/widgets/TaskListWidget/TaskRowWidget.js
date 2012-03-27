@@ -1,26 +1,29 @@
 // custom TaskRowWidget
-define(["dojo/_base/declare", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/text!./templates/TaskRowWidget.html", "dojo/_base/connect"],
-       function (declare, WidgetBase, TemplatedMixin, template, connect) {
+define(["dojo/_base/declare", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/text!./templates/TaskRowWidget.html", "dojo/_base/connect", "dojo/_base/lang"],
+       function (declare, WidgetBase, TemplatedMixin, template, connect, lang) {
            return declare([WidgetBase, TemplatedMixin], {
                title:"Untitled",
                templateString:template,
                baseClass:"taskRowWidget",
-               objectStore: null,
-               _deleteTask: function () {
+               data: null,
+               task: null,
+               _deleteTask: lang.partial(function () {
                    console.log("Deleting Task...");
-                   // Todo - need to xhr req delete this, store can't
-                   this.objectStore.remove(this.task.id);
+                   var id = this.task.id ? this.task.id : this.task.__id;
+                   this.data.deleteItem(id);
+                   this.destroy();
                    console.log("Object removed");
-               },
-               _markCompleted: function() {
+               }, this),
+               _markCompleted: lang.partial(function() {
                    console.log("Marking complete...");
-                   this.objectStore.remove(this.task.id);
-                   console.log(this.task.id);
+                   var id = this.task.id ? this.task.id : this.task.__id;
+                   this.data.deleteItem(id);
+                   this.destroy();
                    console.log("Object removed");
-               },
+               }, this),
                constructor: function(params, srcNodeRef) {
                    this.task = params['item'];
-                   this.objectStore = params['objectStore'];
+                   this.data = params['data'];
                },
                postCreate: function() {
                    // Run any parent postCreate processes - can be done at any point

@@ -1,6 +1,7 @@
 package todo.json.schema;
 
 import org.apache.commons.io.IOUtils;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -19,6 +20,7 @@ import java.util.regex.Pattern;
 /**
  *
  */
+@Component
 public class ValidationDelegator implements Filter {
 
     private URL jsonSchemaValidator;
@@ -81,9 +83,10 @@ public class ValidationDelegator implements Filter {
 
         IOUtils.copy(wrapper.getInputStream(),
                      connection.getOutputStream());
+        boolean valid = connection.getResponseCode() == 200;
 
 
-        if (connection.getResponseCode() == 200) {
+        if (valid) {
             chain.doFilter(wrapper,
                            resp);
         } else {
@@ -95,6 +98,24 @@ public class ValidationDelegator implements Filter {
             IOUtils.copy(connection.getErrorStream(),
                          response.getOutputStream());
         }
+    }
+    
+    public boolean isValid(HttpServletRequest request,
+                                   String contentType) throws IOException {
+        MultiReadHttpServletRequest wrapper = new
+                        MultiReadHttpServletRequest((HttpServletRequest) 
+                                                            request);
+        
+                HttpURLConnection connection =
+                        (HttpURLConnection) jsonSchemaValidator.openConnection();
+                connection.setDoOutput(true);
+                connection.setDoInput(true);
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("content-type", contentType);
+        
+                IOUtils.copy(wrapper.getInputStream(),
+                             connection.getOutputStream());
+                return connection.getResponseCode() == 200;
     }
 
     public void init(FilterConfig config)

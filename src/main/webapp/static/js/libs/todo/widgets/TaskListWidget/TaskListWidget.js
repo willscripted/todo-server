@@ -5,109 +5,58 @@ define(["dojo/_base/declare",
            "dojo/text!./templates/TaskListWidget.html",
            "dojo/_base/connect",
            "todo/widgets/TaskListWidget/TaskRowWidget",
-           "dojo/_base/lang",
-           "dijit/WidgetSet"],
+           "dojo/_base/lang"],
        function (declare, WidgetBase, TemplatedMixin, template, connect,
-                 TaskRowWidget, lang, WidgetSet) {
+                 TaskRowWidget, lang) {
            return declare([WidgetBase, TemplatedMixin], {
                title:"Untitled!",
                templateString:template,
                baseClass:"taskListWidget",
-               query:null,
-               objectStore:null,
-               widgetSet:WidgetSet(),
+               data:null,
                _submit:function (event) {
                    dojo.stopEvent(event);
-
-                   console.log(event);
 
                    var input = $(this.domNode).find("input[name='task']");
                    var title = input.val();
                    input.val("");
 
+                   // Create unique id
+
+                   var date = new Date;
                    var task = {
                        title:title,
                        description:"",
                        complete:false
                    };
 
-                   this.objectStore.add(task)
-                   console.log("Form Submitted.");
+                   task = this.data.newItem(task);
+                   this.data.put(task)
+                   this.insertRow(task);
                },
                constructor:function (params, srcNodeRef) {
-                   this.objectStore = params['store'];
-                   this.query = this.objectStore.query({});
-
-                   var observationHandler = lang.hitch(
-                       this,
-                       function (item, removedIndex, insertedIndex) {
-                           if (removedIndex > -1) {
-                               console.log("Observed removed index");
-                               this.removeRow(item.id);
-                           }
-                           if (insertedIndex > -1) {
-                               console.log("Observed inserted index");
-                               this.insertRow(item, insertedIndex);
-                           }
-                       });
-                   this.query.observe(observationHandler, true);
+                   this.data = params['data'];
                },
-               insertRow:function (item, insertedIndex) {
+               insertRow:function (item) {
                    // Create new row widget
-                   var widget = new TaskRowWidget({item:item, objectStore:this.objectStore});
+                   var widget = new TaskRowWidget({item:item, data:this.data});
                    widget.startup();
-
-                   this.widgetSet.add(widget);
 
                    // Append
                    this.containerNode.appendChild(widget.domNode);
-               },
-               removeRow:function (taskId) {
-                   // Filter set function
-                   var filter = function (id, w) {
-                       if (w && w.item && w.item.id) {
-                           return (w.item.id === id);
-                       } else {
-                           return false;
-                       }
-                   };
-
-                   var doFilter = lang.partial(filter, taskId);
-
-                   // Destory widget function
-                   var handler = lang.hitch(this, function (w) {
-                       this.widgetSet.remove(w);
-                       w.destroy();
-                   });
-
-                   // Apply destroy to filtered widgets
-                   this.widgetSet
-                       .filter(doFilter)
-                       .forEach(handler);
-               },
-               _viewResults:function (results) {
-
-                   var appendTaskToContainer = lang.hitch(
-                       this,
-                       function (thing) {
-                           // Create new row widget
-                           var widget = new TaskRowWidget({item:thing, objectStore:this.objectStore});
-                           widget.startup();
-
-                           this.widgetSet.add(widget);
-
-                           // Append
-                           this.containerNode.appendChild(widget.domNode);
-                       });
-
-                   results.forEach(appendTaskToContainer);
                },
                postCreate:function () {
 
                    // Run any parent postCreate processes - can be done at any point
                    this.inherited(arguments);
 
-                   this._viewResults(this.query);
+                   var processResults = lang.hitch(this, function (results) {
+                       console.log(results);
+                       for (var i = 0; i < results.length; i++) {
+                           this.insertRow(results[i]);
+                       }
+                   });
+
+                   var results = this.data.fetch({query:"", onComplete:processResults});
 
                }
            });

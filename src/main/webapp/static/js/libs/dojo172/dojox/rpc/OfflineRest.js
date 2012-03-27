@@ -3,7 +3,7 @@ define("dojox/rpc/OfflineRest", ["dojo", "dojox", "dojox/data/ClientFilter", "do
 // 		Makes the REST service be able to store changes in local
 // 		storage so it can be used offline automatically.
 	var Rest = dojox.rpc.Rest;
-	var namespace = "dojox_rpc_OfflineRest";
+	var namespace = "dojox-rpc-OfflineRest";
 	var loaded;
 	var index = Rest._index;
 	dojox.storage.manager.addOnLoad(function(){
