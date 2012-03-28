@@ -16,6 +16,7 @@ import todo.webapp.dto.TaskDTO;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.Principal;
 
 /**
  * Controller for managing a specific task of a user.
@@ -26,7 +27,7 @@ import java.io.IOException;
 public class TasksUserTaskController {
 
     private static final String CLASS_REQUEST_MAPPING =
-            "/api/tasks/{username}/{taskId:[0-9]+}";
+            "/api/tasks/{taskId:[0-9]+}";
 
     @Autowired
     private TaskService taskService;
@@ -41,7 +42,6 @@ public class TasksUserTaskController {
      * Retrieve a task of a user.
      *
      * @param taskId   Id of task to retrieve
-     * @param username Username of user owning this task
      * @return application/todo.Task+json Task to retrieve
      */
     @RequestMapping(value = CLASS_REQUEST_MAPPING,
@@ -49,7 +49,7 @@ public class TasksUserTaskController {
     public
     @ResponseBody
     TaskDTO get(@PathVariable Long taskId,
-                @PathVariable String username,
+                Principal principal,
                 HttpServletResponse response) throws IOException {
 
         Task task = taskService.getTask(taskId);
@@ -69,7 +69,6 @@ public class TasksUserTaskController {
      *
      * @param taskDTO  TaskDTO entity
      * @param taskId   Id of task to update
-     * @param username owner of the task to update
      */
     @RequestMapping(value = CLASS_REQUEST_MAPPING,
                     method = RequestMethod.PUT,
@@ -77,13 +76,13 @@ public class TasksUserTaskController {
     public
     @ResponseBody
     void put(@PathVariable Long taskId,
-             @PathVariable String username,
+             Principal principal,
              @RequestBody TaskDTO taskDTO) {
 
         Task task = mapper.map(taskDTO, Task.class);
         task.setId(taskId);
 
-        User user = userService.getUserByUsername(username);
+        User user = userService.getUserByUsername(principal.getName());
         task.setUser(user);
 
         taskService.updateTask(task);
@@ -106,7 +105,6 @@ public class TasksUserTaskController {
      * DELETE - remove a task from the application.
      *
      * @param taskId   Id of task to remove.
-     * @param username Username of user owning the task.
      * @param response Response to be returned.
      */
     @RequestMapping(
@@ -116,7 +114,7 @@ public class TasksUserTaskController {
     public
     @ResponseBody
     void delete(@PathVariable Long taskId,
-                @PathVariable String username,
+                Principal principal,
                 HttpServletResponse response) {
         taskService.removeTask(taskId);
     }

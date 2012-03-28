@@ -16,6 +16,7 @@ import todo.webapp.dto.TaskDTO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.List;
 public class TasksUserCurrentController {
 
     private static final String CLASS_REQUEST_MAPPING =
-            "/api/tasks/{username}/current";
+            "/api/tasks/current";
 
     @Autowired
     private TaskService taskService;
@@ -46,17 +47,16 @@ public class TasksUserCurrentController {
     /**
      * GET - Retrieve a list of the user's current tasks.
      *
-     * @param username Username of user whose current tasks will be retrieved.
      * @return List<Task>
      */
     @RequestMapping(value = CLASS_REQUEST_MAPPING,
                     method = RequestMethod.GET)
     public
     @ResponseBody
-    List<TaskDTO> get(@PathVariable String username) {
+    List<TaskDTO> get(Principal principal) {
 
         Collection<Task> currentTasksOfUser =
-                taskService.getCurrentTasksOfUser(username);
+                taskService.getCurrentTasksOfUser(principal.getName());
 
         List<TaskDTO> tasks = new ArrayList<TaskDTO>(currentTasksOfUser.size
                 ());
@@ -70,15 +70,13 @@ public class TasksUserCurrentController {
     /**
      * PUT - Update the list of current tasks
      *
-     * @param username String username of user whose current tasks should be
-     *                 updated.
      * @param taskIds  Ids of tasks to add.
      */
     @RequestMapping(value = CLASS_REQUEST_MAPPING,
                     method = RequestMethod.PUT)
     public
     @ResponseBody
-    void put(@PathVariable String username,
+    void put(Principal principal,
              @RequestBody Collection<Long> taskIds) {
         throw new UnsupportedOperationException();
     }
@@ -95,13 +93,13 @@ public class TasksUserCurrentController {
                             "application/json"})
     public
     @ResponseBody
-    Long post(@PathVariable String username,
+    Long post(Principal principal,
               @RequestBody TaskDTO taskDTO,
               HttpServletRequest request,
               HttpServletResponse response) {
 
         taskDTO.setComplete(false);
-        return tasksUserController.post(taskDTO, username, response);
+        return tasksUserController.post(taskDTO, principal, response);
     }
 
     /**

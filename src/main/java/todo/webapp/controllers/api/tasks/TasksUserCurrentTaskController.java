@@ -13,6 +13,7 @@ import todo.webapp.dto.TaskDTO;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.Principal;
 
 /**
  *
@@ -22,7 +23,7 @@ public class TasksUserCurrentTaskController {
 
 
     private static final String CLASS_REQUEST_MAPPING =
-            "/api/tasks/{username}/current/{id}";
+            "/api/tasks/current/{id}";
 
     @Autowired
     private TaskService taskService;
@@ -35,10 +36,10 @@ public class TasksUserCurrentTaskController {
     public
     @ResponseBody
     void get(@PathVariable Long id,
-             @PathVariable String username,
+             Principal principal,
              HttpServletResponse response) throws IOException {
 
-        tasksUserTaskController.get(id, username, response);
+        tasksUserTaskController.get(id, principal, response);
 
     }
 
@@ -46,9 +47,9 @@ public class TasksUserCurrentTaskController {
                     method = RequestMethod.PUT,
                     consumes = "application/todo.webapp.dto.TaskDTO+json")
     public @ResponseBody void put(@PathVariable Long id,
-                    @PathVariable String username,
+                                  Principal principal,
                     @RequestBody TaskDTO taskDTO) {
-        tasksUserTaskController.put(id, username, taskDTO);
+        tasksUserTaskController.put(id, principal, taskDTO);
     }
 
     @RequestMapping(value = CLASS_REQUEST_MAPPING,

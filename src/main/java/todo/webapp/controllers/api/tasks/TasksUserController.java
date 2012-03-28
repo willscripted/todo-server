@@ -1,5 +1,6 @@
 package todo.webapp.controllers.api.tasks;
 
+import org.apache.commons.collections.set.SynchronizedSet;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import todo.services.UserService;
 import todo.webapp.dto.TaskDTO;
 
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -27,11 +29,11 @@ import java.util.List;
 @Controller
 public class TasksUserController {
 
-    private static final String CLASS_REQUEST_MAPPING = "/api/tasks/{username}";
+    private static final String CLASS_REQUEST_MAPPING = "/api/tasks/";
 
     @Autowired
     private TaskService taskService;
-    
+
     @Autowired
     private Mapper mapper;
 
@@ -41,21 +43,23 @@ public class TasksUserController {
     /**
      * GET - Retrieve a list of user's tasks
      *
-     * @param username String username of user whose tasks should be retrieved.
      * @return List<Task> application/json
      */
     @RequestMapping(value = CLASS_REQUEST_MAPPING,
                     method = RequestMethod.GET)
     public
     @ResponseBody
-    Collection<TaskDTO> get(@PathVariable String username) {
-        Collection<Task> tasks = taskService.getTasksOfUser(username);
+    Collection<TaskDTO> get(Principal principal) {
+
+        Collection<Task> tasks =
+                taskService.getTasksOfUser(principal.getName());
         Collection<TaskDTO> taskDTOs = new ArrayList<TaskDTO>(tasks.size());
-        
-        for(Task t : tasks) {
-            taskDTOs.add(mapper.map(t, TaskDTO.class));
+
+        for (Task t : tasks) {
+            taskDTOs.add(mapper.map(t,
+                                    TaskDTO.class));
         }
-        
+
         return taskDTOs;
     }
 
@@ -75,7 +79,6 @@ public class TasksUserController {
     /**
      * POST - Add a task for user.
      *
-     * @param username String username of user to create new task for.
      * @param taskDTO TaskDTO
      * @return Serializable id of new task if post is successful,
      *         else response with appropriate status code.
@@ -86,29 +89,29 @@ public class TasksUserController {
     public
     @ResponseBody
     Long post(@RequestBody TaskDTO taskDTO,
-              @PathVariable String username,
+              Principal principal,
               HttpServletResponse response) {
-        Task task = mapper.map(taskDTO, Task.class);
-        User user = userService.getUserByUsername(username);
+        Task task = mapper.map(taskDTO,
+                               Task.class);
+        User user = userService.getUserByUsername(principal.getName());
         task.setUser(user);
         Long id = taskService.addTask(task);
 
         response.setStatus(HttpServletResponse.SC_CREATED);
-        response.setHeader("Location", id.toString());
+        response.setHeader("Location",
+                           id.toString());
 
         return id;
     }
 
     /**
      * DELETE - remove all tasks of user.
-     *
-     * @param username
      */
     @RequestMapping(value = CLASS_REQUEST_MAPPING,
                     method = RequestMethod.DELETE)
     public
     @ResponseBody
-    void delete(@PathVariable String username) {
+    void delete(Principal principal) {
         throw new UnsupportedOperationException();
     }
 

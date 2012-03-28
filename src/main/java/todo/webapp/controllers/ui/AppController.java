@@ -14,10 +14,9 @@ public class AppController {
         return "app/base";
     }
     
-    @RequestMapping("/app/manifest/")
-    public String manifest() {
-        return "app/manifest";
+    @RequestMapping("/mobile/")
+    public String mobile() {
+        return "mobile";
     }
-    
     
 }

@@ -56,4 +56,9 @@
         <put-attribute name="body" value="/WEB-INF/tiles/test.jsp" />
     </definition>
 
+    <definition name="mobile"
+                template="/static/mobile/index.html" />
+
+
+
 </tiles-definitions>
