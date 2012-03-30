@@ -19,7 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Controller managing tasks of a specific user
@@ -88,9 +92,14 @@ public class TasksUserController {
                     consumes = "application/todo.webapp.dto.TaskDTO+json")
     public
     @ResponseBody
-    Long post(@RequestBody TaskDTO taskDTO,
+    Map<String, Object> post(@RequestBody TaskDTO taskDTO,
               Principal principal,
               HttpServletResponse response) {
+        
+        if( ! this.isLong(taskDTO.getId())) {
+            taskDTO.setId("");
+        }
+        
         Task task = mapper.map(taskDTO,
                                Task.class);
         User user = userService.getUserByUsername(principal.getName());
@@ -100,8 +109,13 @@ public class TasksUserController {
         response.setStatus(HttpServletResponse.SC_CREATED);
         response.setHeader("Location",
                            id.toString());
+        
+        Map<String, Object> jsonResponse = new HashMap<String, Object>();
+        jsonResponse.put("success", true);
+        jsonResponse.put("id", id);
 
-        return id;
+
+        return jsonResponse;
     }
 
     /**
@@ -115,4 +129,9 @@ public class TasksUserController {
         throw new UnsupportedOperationException();
     }
 
+    private boolean isLong(String string) {
+        Pattern p = Pattern.compile("[0-9]+");
+        Matcher m = p.matcher(string);
+        return m.matches();
+    }
 }

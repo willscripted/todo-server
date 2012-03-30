@@ -20,6 +20,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Controller for accessing/modifying the current tasks of a user.
@@ -93,7 +94,7 @@ public class TasksUserCurrentController {
                             "application/json"})
     public
     @ResponseBody
-    Long post(Principal principal,
+    Map<String, Object> post(Principal principal,
               @RequestBody TaskDTO taskDTO,
               HttpServletRequest request,
               HttpServletResponse response) {

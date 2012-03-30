@@ -2,6 +2,6 @@ Ext.define('BSMobile.model.Task', {
 
     extend:'Ext.data.Model',
     config: {
-        fields:['title', 'complete']
+        fields:['title', 'complete', 'id']
     }
 });

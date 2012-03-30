@@ -2,6 +2,8 @@ Ext.define('BSMobile.view.AddForm', {
 
     extend:'Ext.form.Panel',
 
+    require: ['BSMobile.model.Task'],
+
     xtype:'addform',
 
     config:{
@@ -15,7 +17,7 @@ Ext.define('BSMobile.view.AddForm', {
                 items:[
                     {
                         xtype:'textfield',
-                        name:'task',
+                        name:'title',
                         label:'Title'
                     }
                 ]
@@ -23,14 +25,14 @@ Ext.define('BSMobile.view.AddForm', {
             {
                 xtype:'button',
                 text:'Add',
-                ui:'confirm',
-                handler: function() {
-                    var values = this.up('addform').getValues();
-                    console.log(values);
-                }
+                action: 'save',
+                ui:'confirm'
             }
-        ]
+        ],
+        record: Ext.create('BSMobile.model.Task')
     }
+
+
 
 
 });
