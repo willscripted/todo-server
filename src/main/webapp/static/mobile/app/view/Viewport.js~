@@ -1,0 +1,7 @@
+Ext.define('BSMobile.view.Main', {
+
+    extend: 'Ext.view.Panel',
+    alias: 'widget.main'
+
+
+});

@@ -1,0 +1,4 @@
+var helloworld = new Ext.Application({
+    launch: function() {
+    }
+});

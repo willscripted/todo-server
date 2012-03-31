@@ -29,14 +29,15 @@ public class UserConverterTest {
         this.dozerMapper = dm;
     }
 
-    private Long USER_ID = 4234L;
+    private String USERNAME = "someusername";
     
     @Before
     public void setUp() throws Exception {
         User user = new User();
         user.setPassword("SOMEPASS");
         user.setCreated(new Date());
-        user.setId(USER_ID);
+        user.setUsername(USERNAME);
+
         
         task = new Task();
         task.setId(1234L);
@@ -47,7 +48,5 @@ public class UserConverterTest {
     @Test
     public void testConvert() throws Exception {
         TaskDTO taskDTO = dozerMapper.map(task, TaskDTO.class);
-        assertTrue(taskDTO.getUserId().equals(USER_ID));
-        assertTrue(taskDTO.getTitle().equals("hello"));
     }
 }

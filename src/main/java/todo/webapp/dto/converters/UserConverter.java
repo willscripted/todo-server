@@ -4,7 +4,7 @@ import org.dozer.CustomConverter;
 import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import todo.domain.User;
-import todo.persistence.UserDao;
+import todo.services.UserService;
 
 /**
  *
@@ -12,7 +12,7 @@ import todo.persistence.UserDao;
 public class UserConverter implements CustomConverter {
 
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
 
     public UserConverter() {
     }
@@ -27,13 +27,13 @@ public class UserConverter implements CustomConverter {
         }
 
         // String -> User
-        if(sourceFieldValue instanceof Long) {
-            return userDao.findByPrimaryKey(sourceFieldValue);
+        if(sourceFieldValue instanceof String) {
+            return userService.getUserByUsername((String) sourceFieldValue);
         }
         // User -> String
         else if(sourceFieldValue instanceof User) {
             User user = (User) sourceFieldValue;
-            return user.getId();
+            return user.getUsername();
         }
         // Else err
         else {

@@ -9,6 +9,7 @@
     <definition name="base"
                 template="/WEB-INF/tiles/baseLayout.jsp">
         <put-attribute name="title" value="Template"/>
+        <put-attribute name="manifest" value="" />
         <put-attribute name="head" value="/WEB-INF/tiles/head.jsp"/>
         <put-attribute name="pageHeader" value="/WEB-INF/tiles/pageHeader.jsp"/>
         <put-attribute name="body" value="/WEB-INF/tiles/body.jsp"/>
@@ -31,6 +32,11 @@
         <put-attribute name="body" value="/WEB-INF/tiles/reg/success.jsp" />
     </definition>
 
+    <definition name="app/base" extends="base">
+            <put-attribute name="title" value="Todo - List" />
+            <put-attribute name="body" value="/WEB-INF/tiles/app/list.jsp" />
+        <put-attribute name="manifest" value="/app/manifest/" />
+    </definition>
 
     <definition name="tos" extends="base">
         <put-attribute name="title" value="Todo - Terms of Service"/>
@@ -43,5 +49,16 @@
 
     <definition name="robots.txt"
                 template="/static/robots.txt" />
+
+    <definition name="app/manifest" template="/WEB-INF/tiles/app/manifest.jsp" />
+
+    <definition name="test" extends="base">
+        <put-attribute name="body" value="/WEB-INF/tiles/test.jsp" />
+    </definition>
+
+    <definition name="mobile"
+                template="/static/mobile/index.html" />
+
+
 
 </tiles-definitions>

@@ -11,7 +11,7 @@
         <custom-converters>
             <converter type="todo.webapp.dto.converters.UserConverter">
                 <class-a>todo.domain.User</class-a>
-                <class-b>java.lang.Long</class-b>
+                <class-b>java.lang.String</class-b>
             </converter>
         </custom-converters>
 
@@ -21,10 +21,6 @@
     <mapping>
         <class-a>todo.domain.Task</class-a>
         <class-b>todo.webapp.dto.TaskDTO</class-b>
-        <field>
-            <a>user</a>
-            <b>userId</b>
-        </field>
     </mapping>
 
 

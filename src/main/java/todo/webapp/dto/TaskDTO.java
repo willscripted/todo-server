@@ -9,18 +9,17 @@ import org.codehaus.jackson.schema.JsonSchema;
  */
 public class TaskDTO {
     
-    private Long id;
+    private String id;
     private String title;
     private String description;
     private boolean complete;
-    private Long userId;
 
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -46,14 +45,6 @@ public class TaskDTO {
 
     public void setComplete(boolean complete) {
         this.complete = complete;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public static void main(String[] args) throws JsonMappingException {

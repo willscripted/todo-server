@@ -17,32 +17,15 @@ import java.util.Date;
  *
  * @author Will O'Brien
  */
-@Entity
 public class RegistrationForm {
-
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment",
-                      strategy = "increment")
-    private Long id;
 
     private Long created;
 
-    @Column(nullable = false, unique = true)
     private String sessionId;
     
     private String username;
     private String email;
     private String password;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Date getCreated() {
         return new Date(created);

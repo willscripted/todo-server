@@ -3,7 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div class="clearfix">
     <a href="/">
-        <div id="logo">ToDo</div>
+        <div id="logo">blockstep</div>
     </a>
 
     <span id="slogan">The secret of getting ahead is getting started. -

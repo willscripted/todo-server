@@ -6,7 +6,7 @@
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" manifest="<tiles:getAsString name="manifest" />" /><!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -32,9 +32,10 @@
     <%--<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.1/dojo/dojo.js" type="text/javascript"></script>--%>
     <%--<script>window.dojo ||--%>
             <%--document.write('<script src="/static/js/libs/dojo-release-1.7.1/dojo/dojo.js"><\/script>')</script>--%>
-    <script src="/static/js/libs/dojo171/dojo/dojo.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/static/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+    <script src="/static/js/libs/dojo172/dojo/dojo.js"></script>
+    <script src="/static/js/libs/jquery-1.7.1.min.js">
+    <%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>--%>
+    <%--<script>window.jQuery || document.write('<script src="/static/js/libs/jquery-1.7.1.min.js"><\/script>')</script>--%>
 
 
     <script type="text/javascript">
