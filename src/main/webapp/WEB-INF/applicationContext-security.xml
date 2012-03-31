@@ -31,18 +31,22 @@
         <intercept-url pattern="/tos/**"
                        access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/api/users/**"
-                       access="IS_AUTHENTICATED_ANONYMOUSLY" />
+                       access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/registration/**"
                        access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/users/**"
                        access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/mobile/"
+                       access="ROLE_USER"/>
+        <intercept-url pattern="/app/"
+                       access="ROLE_USER"/>
 
         <logout logout-url="/logout/" logout-success-url="/"/>
         <form-login
                 login-page="/login/"
                 authentication-failure-url="/login/invalid/"
-                default-target-url="/redirector/" />
+                default-target-url="/redirector/"/>
     </http>
 
     <authentication-manager>
