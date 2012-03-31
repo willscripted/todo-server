@@ -42,7 +42,7 @@
         <form-login
                 login-page="/login/"
                 authentication-failure-url="/login/invalid/"
-                default-target-url="/app/" />
+                default-target-url="/redirector/" />
     </http>
 
     <authentication-manager>
