@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import todo.domain.Task;
@@ -44,7 +45,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
     public Collection<Task> getCurrentTasksOfUser(String username) {
         Session session = sessionFactory.getCurrentSession();
         Query findIncompleteTasks =

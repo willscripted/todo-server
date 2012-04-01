@@ -41,11 +41,8 @@ Ext.define('BSMobile.controller.Tasks', {
         if (e.target.tagName == "IMG") {
             if (e.target.className == "checkbox") {
                 record.set('complete', true);
-                store.sync();
-                store.load();
             } else if (e.target.className == "delete") {
                 store.remove(record);
-                store.sync();
             }
         }
     },
@@ -57,7 +54,6 @@ Ext.define('BSMobile.controller.Tasks', {
         var task = Ext.create('BSMobile.model.Task', values);
         var store = Ext.getStore('TasksToday');
         store.add(task);
-        store.sync();
 
         button.up('addform').setValues({title: ""});
 
