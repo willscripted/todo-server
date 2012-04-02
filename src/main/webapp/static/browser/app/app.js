@@ -1,0 +1,28 @@
+Ext.Loader.setConfig({enabled:true});
+Ext.application({
+                    name:'BS',
+
+                    appFolder:'/static/browser/app',
+
+                    views:['Main'],
+
+                    controllers:[
+                        'Task',
+                        'Stats'
+                    ],
+
+                    models:[],
+
+                    stores:[],
+
+                    launch:function () {
+                        Ext.create('Ext.container.Viewport', {
+                            layout:'fit',
+                            items:[
+                                Ext.create('BS.view.Main')
+                            ]
+
+
+                        });
+                    }
+                });
