@@ -5,6 +5,16 @@
     font-weight: bold;
     margin: 0px;
     padding: 0 0 0 15px;
+    float: left;
+}
+
+#tm {
+    color: #AAAAAA;
+    font-family: georgia, serif;
+    padding: 10px 0 0 0;
+    font-weight: normal;
+    font-size: 1.5em;
+    float: left;
 }
 
 div.x-grid-checkheader {
@@ -17,4 +27,10 @@ div.x-grid-checkheader-checked {
     background-image: url('/static/browser/resources/images/checkedbox.png');
     width: 21px;
     height: 21px;
+}
+
+span#quote {
+    color: #BBBBBB;
+    font-family: cursive;
+    font-size: 1.0em;
 }

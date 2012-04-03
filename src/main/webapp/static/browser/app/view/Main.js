@@ -27,15 +27,17 @@ Ext.define('BS.view.Main', {
                     layout: 'hbox',
                     items: [
                         {
-                            xtype: 'container',
-                            html: '<div id="logo">Blockstep</div>',
-                            flex: 1
+                            xtype:'container',
+                            html:'<div id="logo">Blockstep</div><div id="tm">&trade;</div>',
+                            columnWidth:.25,
+                            padding:'15 0 0 0'
                         },
                         {
-                            xtype: 'container',
-                            html: 'The secret of getting ahead is getting started. - Mark Twain',
-                            flex: 2
-                        },
+                            xtype:'container',
+                            html:'<span id="quote">The secret of getting ahead is getting started. - Mark Twain</span>',
+                            columnWidth:.5,
+                            padding:'50 0 0 0'
+                        }                        ,
                         {
                             xtype: 'container',
                             html: 'Navigation....',
