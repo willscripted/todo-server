@@ -1,0 +1,20 @@
+#logo {
+    color: #888888;
+    font-family: georgia, serif;
+    font-size: 4em;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0 0 0 15px;
+}
+
+div.x-grid-checkheader {
+    background-image:url('/static/browser/resources/images/checkbox.png');
+    width: 21px;
+    height: 21px;
+}
+
+div.x-grid-checkheader-checked {
+    background-image: url('/static/browser/resources/images/checkedbox.png');
+    width: 21px;
+    height: 21px;
+}

@@ -1,4 +1,9 @@
-Ext.Loader.setConfig({enabled:true});
+Ext.Loader.setConfig({
+                         enabled:true,
+                         paths:{
+                             'Ext':'/static/browser/lib/extjs/src'
+                         }
+                     });
 Ext.application({
                     name:'BS',
 

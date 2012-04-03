@@ -2,6 +2,7 @@ Ext.define('BS.store.task.Today', {
     extend:'Ext.data.Store',
     storeId: 'taskToday',
 
+    groupField: 'complete',
     fields: ['complete', 'title'],
     data:[
         { 'complete':true, "title":"Do Homework" },

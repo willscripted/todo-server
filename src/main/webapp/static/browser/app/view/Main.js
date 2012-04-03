@@ -28,7 +28,7 @@ Ext.define('BS.view.Main', {
                     items: [
                         {
                             xtype: 'container',
-                            html: '<a href="/">Blockstep</a>',
+                            html: '<div id="logo">Blockstep</div>',
                             flex: 1
                         },
                         {
