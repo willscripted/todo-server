@@ -17,10 +17,23 @@ Ext.define('BS.view.HomeTab', {
             padding:15
         },
         {
-            xtype:'stats.overview',
+            xtype: 'container',
             flex:3,
-            title:'Stats',
-            padding:15
+            padding:15,
+            layout: {
+                type: 'vbox',
+                align: 'stretch'
+            },
+            items: [
+                {
+                    xtype: 'task.addunscheduled'
+                },
+                {
+                    xtype:'stats.overview',
+                    flex: 1
+                }
+            ]
         }
+
     ]
 });

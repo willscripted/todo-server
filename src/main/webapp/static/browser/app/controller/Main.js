@@ -2,7 +2,7 @@ Ext.define('BS.controller.Main', {
 
     extend:'Ext.app.Controller',
 
-    views:['Main', 'NavButton'],
+    views:['Main', 'NavButton', 'HomeTab'],
     init:function () {
 
         this.control({
