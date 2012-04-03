@@ -13,7 +13,8 @@ Ext.application({
 
                     controllers:[
                         'Task',
-                        'Stats'
+                        'Stats',
+                        'Main'
                     ],
 
                     models:[],

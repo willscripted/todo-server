@@ -2,30 +2,33 @@ Ext.define('BS.view.Main', {
 
     extend:'Ext.container.Container',
     alias:'widget.main',
-    layout: {
-        type: 'hbox',
-        align: 'stretch'
+    layout:{
+        type:'hbox',
+        align:'stretch'
     },
     items:[
         {
             xtype:'container',
             title:'left gutter',
-            flex: 1
+            flex:1
         },
         {
             xtype:'container',
-            title:'main',
-            flex: 5,
-            layout: {
-                type: 'vbox',
-                align: 'stretch'
+            border:false,
+            flex:5,
+            layout:{
+                type:'vbox',
+                align:'stretch'
             },
-            items: [
+            items:[
                 {
-                    xtype: 'container',
-                    height: 80,
-                    layout: 'hbox',
-                    items: [
+                    xtype:'container',
+                    height:80,
+                    layout:{
+                        type:'column',
+                        align:'middle'
+                    },
+                    items:[
                         {
                             xtype:'container',
                             html:'<div id="logo">Blockstep</div><div id="tm">&trade;</div>',
@@ -39,46 +42,83 @@ Ext.define('BS.view.Main', {
                             padding:'50 0 0 0'
                         }                        ,
                         {
-                            xtype: 'container',
-                            html: 'Navigation....',
-                            flex: 2
+                            xtype:'container',
+                            columnWidth:.25,
+                            margin:'5',
+                            layout:{
+                                type:'hbox',
+                                align:'stretchmax'
+                            },
+                            defaults:{
+                                xtype:'navbutton',
+                                margin:'20 5 0 0',
+                                flex:1
+                            },
+                            items:[
+                                {
+                                    text:'Home',
+                                    tabItemId:'Home'
+                                },
+                                {
+                                    text:'Planning',
+                                    tabItemId: 'Planning'
+                                },
+                                {
+                                    text:'Projects',
+                                    tabItemId: 'Projects'
+                                },
+                                {
+                                    text:'Routines',
+                                    tabItemId: 'Routines'
+                                }
+                            ]
                         }
                     ]
                 },
                 {
-                    xtype: 'panel',
-                    flex: 6,
-                    title: 'content',
-                    layout: {
-                        type: 'hbox',
-                        align: 'stretch'
+                    xtype:'tabpanel',
+                    flex:1,
+                    plain:true,
+                    border: false,
+                    tabBar: {
+                        hidden: true
                     },
-                    items: [
+                    items:[
                         {
-                            xtype: 'daylist',
-                            flex: 1
+                            xtype:'hometab',
+                            title:'Home',
+                            itemId: 'Home'
                         },
                         {
-                            xtype: 'stats.overview',
-                            flex: 3,
-                            title: 'Stats'
+                            xtype:'container',
+                            title:'Planning',
+                            html:'Planning',
+                            itemId: 'Planning'
+                        },
+                        {
+                            xtype:'container',
+                            title:'Projects',
+                            html:'Projects',
+                            itemId: 'Projects'
+                        },
+                        {
+                            xtype:'container',
+                            title:'Routines',
+                            html:'Routines',
+                            itemId: 'Routines'
                         }
                     ]
-                },
-                {
-                    xtype: 'panel',
-                    title: 'footer',
-                    flex: 1
                 }
             ]
         },
         {
             xtype:'container',
             title:'right gutter',
-            flex: 1
+            flex:1
         }
     ]
 
 
 
-});
+})
+;
