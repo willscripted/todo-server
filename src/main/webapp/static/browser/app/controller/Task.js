@@ -16,11 +16,14 @@ Ext.define('BS.controller.Task', {
         this.control({
                          '[xtype="task.addunscheduled"] > textfield':{
                              keyup:this.onKeyPress
-                         }Ad
+                         },
+                         '[xtype="daylist"] > textfield':{
+                             keyup:this.onKeyPress
+                         }
                      });
     },
     onKeyPress:function (field, e) {
-        if(e.getCharCode() === 13) {
+        if (e.getCharCode() === 13) {
             console.log("Enter button pressed");
             console.log(field.getValue());
         }

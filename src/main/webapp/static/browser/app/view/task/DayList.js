@@ -32,6 +32,16 @@ Ext.define('BS.view.task.DayList', {
     enableColumnHide: false,
     enableColumnMove: false,
     enableColumnResize: false,
-    sortableColumns: false
+    sortableColumns: false,
+
+    dockedItems: [
+        {
+            xtype: 'textfield',
+            emptyText: 'Add task to today...',
+            enableKeyEvents: true,
+            dock: 'top',
+            minLength: 1
+        }
+    ]
 
 });
