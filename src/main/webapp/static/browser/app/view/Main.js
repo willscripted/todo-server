@@ -86,13 +86,10 @@ Ext.define('BS.view.Main', {
                     items:[
                         {
                             xtype:'hometab',
-                            title:'Home',
                             itemId: 'Home'
                         },
                         {
-                            xtype:'container',
-                            title:'Planning',
-                            html:'Planning',
+                            xtype:'planningtab',
                             itemId: 'Planning'
                         },
                         {
