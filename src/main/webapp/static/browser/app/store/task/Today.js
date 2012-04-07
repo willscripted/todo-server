@@ -1,14 +1,25 @@
 Ext.define('BS.store.task.Today', {
     extend:'Ext.data.Store',
-    storeId: 'taskToday',
-
-    groupField: 'complete',
-    fields: ['complete', 'title'],
-    data:[
-        { 'complete':true, "title":"Do Homework" },
-        { 'complete':true, "title":"Debate" },
-        { 'complete':false, "title":"Extend Panel" },
-        { 'complete':false, "title":"Do work" }
-    ],
-    autoLoad: true
+    alias:'store.task.Today',
+    requires:['BS.model.Task', 'BS.data.proxy.JsonSchemaRest'],
+    model:'BS.model.Task',
+    proxy:{
+        type:'JsonSchemaRest',
+        api:{
+            create:'/api/tasks/',
+            read:'/api/tasks/',
+            update:'/api/tasks/',
+            destroy:'/api/tasks/'
+        },
+        reader:{
+            type:'json',
+            root: 'tasks'
+        },
+        headers:{
+            'Content-Type':'application/todo.webapp.dto.TaskDTO+json'
+        },
+        batchActions:false
+    },
+    autoLoad:true,
+    autoSync:true
 });

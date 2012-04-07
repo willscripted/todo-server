@@ -19,14 +19,6 @@ Ext.define('BS.view.task.DayList', {
         }
     ],
     align:'stretch',
-    features:[
-        {
-            ftype:'grouping',
-            groupHeaderTpl:'',
-            enableNoGroups:false,
-            enableGroupingMenu:false
-        }
-    ],
     plugins:[
         Ext.create('Ext.grid.plugin.CellEditing', {
             clicksToEdit:1

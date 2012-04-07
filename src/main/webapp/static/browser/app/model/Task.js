@@ -1,7 +1,9 @@
 Ext.define('BS.model.Task', {
 
     extend:'Ext.data.Model',
-    config: {
-        fields:['title', 'complete', 'id']
-    }
+    fields:[
+        {name: 'title', type: 'string'},
+        {name: 'complete', type: 'boolean', defaultValue: false},
+        {name: 'id'}
+    ]
 });

@@ -34,5 +34,4 @@ Ext.define('BSMobile.store.TasksToday', {
         autoLoad:true,
         autoSync:true
     }
-})
-;
+});
