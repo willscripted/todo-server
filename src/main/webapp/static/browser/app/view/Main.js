@@ -3,7 +3,8 @@ Ext.define('BS.view.Main', {
     extend:'Ext.container.Container',
     alias:'widget.main',
     layout:{
-        type:'ux.center'
+        type:'ux.center',
+        align: 'stretch'
     },
     items:[
         {
@@ -13,8 +14,8 @@ Ext.define('BS.view.Main', {
             layout:{
                 type:'anchor'
             },
-            defaults: {
-                anchor: '100%'
+            defaults:{
+                anchor:'100%'
             },
             items:[
                 {
@@ -57,15 +58,15 @@ Ext.define('BS.view.Main', {
                                 },
                                 {
                                     text:'Planning',
-                                    tabItemId: 'Planning'
+                                    tabItemId:'Planning'
                                 },
                                 {
                                     text:'Projects',
-                                    tabItemId: 'Projects'
+                                    tabItemId:'Projects'
                                 },
                                 {
                                     text:'Routines',
-                                    tabItemId: 'Routines'
+                                    tabItemId:'Routines'
                                 }
                             ]
                         }
@@ -74,50 +75,41 @@ Ext.define('BS.view.Main', {
                 {
                     xtype:'tabpanel',
                     plain:true,
-                    border: false,
-                    layout: {
-                        type: 'anchor'
+                    border:false,
+                    layout:{
+                        type:'anchor'
                     },
-                    defaults: {autoScroll: true},
-                    tabBar: {
-                        hidden: true
+                    defaults:{autoScroll:true},
+                    tabBar:{
+                        hidden:true
                     },
                     items:[
                         {
                             xtype:'hometab',
-                            itemId: 'Home',
-                            height: 600
+                            itemId:'Home',
+                            height:600
                         },
                         {
                             xtype:'planningtab',
-                            itemId: 'Planning',
-                            autoScroll: true,
-                            height: 8000
+                            itemId:'Planning',
+                            autoScroll:true,
+                            height:8000
                         },
                         {
                             xtype:'container',
                             title:'Projects',
                             html:'Projects',
-                            itemId: 'Projects'
+                            itemId:'Projects'
                         },
                         {
                             xtype:'container',
                             title:'Routines',
                             html:'Routines',
-                            itemId: 'Routines'
-                        }
-                    ]
-                },
-                {
-                    xtype: 'container',
-                    items: [
-                        {
-                            xtype: 'panel',
-                            title: 'Footer',
-                            height: 300
+                            itemId:'Routines'
                         }
                     ]
                 }
+
             ]
         }
     ]

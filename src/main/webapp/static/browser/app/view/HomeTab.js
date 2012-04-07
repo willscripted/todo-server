@@ -26,7 +26,15 @@ Ext.define('BS.view.HomeTab', {
             },
             items: [
                 {
-                    xtype: 'task.addunscheduled'
+                    xtype: 'textfield',
+                    height: 40,
+                    emptyText: 'Add Task...',
+                    minLength: 1,
+                    enableKeyEvents: true,
+                    fieldStyle: {
+                        padding: '0 0 0 10',
+                        'font-size': '1.2em'
+                    }
                 },
                 {
                     xtype:'stats.overview',

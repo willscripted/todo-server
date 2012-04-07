@@ -19,29 +19,36 @@ Ext.define('BS.view.task.DayList', {
         }
     ],
     align:'stretch',
-    features: [{
-        ftype:'grouping',
-        groupHeaderTpl: '',
-        enableNoGroups: false,
-        enableGroupingMenu: false
-    }],
-    plugins: [
+    features:[
+        {
+            ftype:'grouping',
+            groupHeaderTpl:'',
+            enableNoGroups:false,
+            enableGroupingMenu:false
+        }
+    ],
+    plugins:[
         Ext.create('Ext.grid.plugin.CellEditing', {
-            clicksToEdit: 1
+            clicksToEdit:1
         })
     ],
-    enableColumnHide: false,
-    enableColumnMove: false,
-    enableColumnResize: false,
-    sortableColumns: false,
+    enableColumnHide:false,
+    enableColumnMove:false,
+    enableColumnResize:false,
+    sortableColumns:false,
 
-    dockedItems: [
+    dockedItems:[
         {
-            xtype: 'textfield',
-            emptyText: 'Add task to today...',
-            enableKeyEvents: true,
-            dock: 'top',
-            minLength: 1
+            xtype:'textfield',
+            height:30,
+            emptyText:'Add task to today...',
+            minLength:1,
+            dock:'top',
+            enableKeyEvents:true,
+            fieldStyle:{
+                padding:'0 0 0 10',
+                'font-size':'1.1em'
+            }
         }
     ]
 
