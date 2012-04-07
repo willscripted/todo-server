@@ -15,7 +15,12 @@ Ext.define('BS.view.task.DayList', {
             header:'Task',
             dataIndex:'title',
             flex:1,
-            editor: 'textfield'
+            editor: {
+                type: 'textfield',
+                style: {
+                    margin: '4 0'
+                }
+            }
         }
     ],
     align:'stretch',

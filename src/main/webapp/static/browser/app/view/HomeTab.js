@@ -2,6 +2,7 @@ Ext.define('BS.view.HomeTab', {
 
     extend:'Ext.container.Container',
     alias: 'widget.hometab',
+    height: 1500,
     layout:{
         type:'hbox',
         align:'stretch'
@@ -10,6 +11,7 @@ Ext.define('BS.view.HomeTab', {
         {
             xtype:'daylist',
             flex:1,
+            height: 800,
             layout:{
                 type:'hbox',
                 align:'stretch'
@@ -37,8 +39,9 @@ Ext.define('BS.view.HomeTab', {
                     }
                 },
                 {
-                    xtype:'stats.overview',
-                    flex: 1
+                    xtype:'container',
+                    items: [{xtype: 'stats.overview'}],
+                    flex: 0
                 }
             ]
         }

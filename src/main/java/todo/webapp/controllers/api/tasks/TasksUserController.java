@@ -105,6 +105,7 @@ public class TasksUserController {
         User user = userService.getUserByUsername(principal.getName());
         task.setUser(user);
         Long id = taskService.addTask(task);
+        task.setId(id);
 
         response.setStatus(HttpServletResponse.SC_CREATED);
         response.setHeader("Location",
@@ -114,6 +115,9 @@ public class TasksUserController {
         jsonResponse.put("success", true);
         jsonResponse.put("id", id);
 
+        ArrayList<TaskDTO> returnArray = new ArrayList<TaskDTO>();
+        returnArray.add(mapper.map(task, TaskDTO.class));
+        jsonResponse.put("tasks", returnArray);
 
         return jsonResponse;
     }

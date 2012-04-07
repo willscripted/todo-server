@@ -15,17 +15,36 @@ Ext.define('BS.controller.Task', {
     init:function () {
         this.control({
                          '[xtype="task.addunscheduled"] > textfield':{
-                             keyup:this.onKeyPress
+                             keyup:this.addUnscheduled
                          },
                          '[xtype="daylist"] > textfield':{
-                             keyup:this.onKeyPress
+                             keyup:this.addToday
                          }
                      });
     },
-    onKeyPress:function (field, e) {
+    _addTaskToStore:function (field, storeName) {
+
+        // Get title & reset field
+        var title = field.getValue();
+        field.setValue("");
+
+        // Get store
+        var store = Ext.getStore(storeName);
+
+        // Create task
+        var task = Ext.create('BS.model.Task', {title: title, complete: false});
+
+        // Add
+        store.add(task);
+    },
+    addUnscheduled: function(field, e) {
         if (e.getCharCode() === 13) {
-            console.log("Enter button pressed");
-            console.log(field.getValue());
+            this._addTaskToStore(field, 'task.Unscheduled');
+        }
+    },
+    addToday: function(field, e) {
+        if (e.getCharCode() === 13) {
+            this._addTaskToStore(field, 'task.Today');
         }
     }
 

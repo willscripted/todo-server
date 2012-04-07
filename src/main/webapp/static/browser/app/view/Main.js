@@ -86,14 +86,12 @@ Ext.define('BS.view.Main', {
                     items:[
                         {
                             xtype:'hometab',
-                            itemId:'Home',
-                            height:600
+                            itemId:'Home'
                         },
                         {
                             xtype:'planningtab',
                             itemId:'Planning',
-                            autoScroll:true,
-                            height:8000
+                            height:2000
                         },
                         {
                             xtype:'container',

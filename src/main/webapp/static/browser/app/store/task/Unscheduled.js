@@ -1,9 +1,10 @@
 Ext.define('BS.store.task.Unscheduled', {
     extend:'Ext.data.Store',
-    storeId: 'taskUnscheduled',
+    alias:'store.task.Unscheduled',
 
-    groupField: 'complete',
-    fields: ['complete', 'title'],
+    requires: ['BS.model.Task'],
+    model: 'BS.model.Task',
+
     data:[
         { 'complete':true, "title":"Do Homework" },
         { 'complete':true, "title":"Debate" },
