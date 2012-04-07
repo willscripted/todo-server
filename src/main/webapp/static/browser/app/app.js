@@ -25,7 +25,10 @@ Ext.application({
                         Ext.create('Ext.container.Viewport', {
                             layout:'fit',
                             items:[
-                                Ext.create('BS.view.Main')
+                                {
+                                    xtype: 'main',
+                                    autoScroll: true
+                                }
                             ]
 
 

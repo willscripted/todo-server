@@ -3,6 +3,7 @@ Ext.define('BS.controller.Main', {
     extend:'Ext.app.Controller',
 
     views:['Main', 'NavButton', 'HomeTab'],
+    requires:['Ext.ux.layout.Center'],
     init:function () {
 
         this.control({

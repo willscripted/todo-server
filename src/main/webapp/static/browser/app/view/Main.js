@@ -3,22 +3,18 @@ Ext.define('BS.view.Main', {
     extend:'Ext.container.Container',
     alias:'widget.main',
     layout:{
-        type:'hbox',
-        align:'stretch'
+        type:'ux.center'
     },
     items:[
         {
             xtype:'container',
-            title:'left gutter',
-            flex:1
-        },
-        {
-            xtype:'container',
             border:false,
-            flex:5,
+            widthRatio:.80,
             layout:{
-                type:'vbox',
-                align:'stretch'
+                type:'anchor'
+            },
+            defaults: {
+                anchor: '100%'
             },
             items:[
                 {
@@ -77,20 +73,26 @@ Ext.define('BS.view.Main', {
                 },
                 {
                     xtype:'tabpanel',
-                    flex:1,
                     plain:true,
                     border: false,
+                    layout: {
+                        type: 'anchor'
+                    },
+                    defaults: {autoScroll: true},
                     tabBar: {
                         hidden: true
                     },
                     items:[
                         {
                             xtype:'hometab',
-                            itemId: 'Home'
+                            itemId: 'Home',
+                            height: 600
                         },
                         {
                             xtype:'planningtab',
-                            itemId: 'Planning'
+                            itemId: 'Planning',
+                            autoScroll: true,
+                            height: 8000
                         },
                         {
                             xtype:'container',
@@ -105,13 +107,18 @@ Ext.define('BS.view.Main', {
                             itemId: 'Routines'
                         }
                     ]
+                },
+                {
+                    xtype: 'container',
+                    items: [
+                        {
+                            xtype: 'panel',
+                            title: 'Footer',
+                            height: 300
+                        }
+                    ]
                 }
             ]
-        },
-        {
-            xtype:'container',
-            title:'right gutter',
-            flex:1
         }
     ]
 

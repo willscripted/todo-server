@@ -1,6 +1,7 @@
 Ext.define('BS.view.task.DayList', {
 
     extend:'Ext.grid.Panel',
+
     store:'task.Today',
     alias:'widget.daylist',
     title:'Today',
