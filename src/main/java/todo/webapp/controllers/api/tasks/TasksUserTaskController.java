@@ -17,6 +17,8 @@ import todo.webapp.dto.TaskDTO;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Controller for managing a specific task of a user.
@@ -75,7 +77,7 @@ public class TasksUserTaskController {
                     consumes = "application/todo.webapp.dto.TaskDTO+json")
     public
     @ResponseBody
-    void put(@PathVariable Long taskId,
+    Map<String, Object> put(@PathVariable Long taskId,
              Principal principal,
              @RequestBody TaskDTO taskDTO) {
 
@@ -86,6 +88,12 @@ public class TasksUserTaskController {
         task.setUser(user);
 
         taskService.updateTask(task);
+
+        Map<String, Object> success = new HashMap<String, Object>();
+        success.put("success", true);
+        success.put("tasks", taskDTO);
+
+        return success;
     }
 
     /**

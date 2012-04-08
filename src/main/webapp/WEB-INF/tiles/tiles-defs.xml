@@ -32,11 +32,7 @@
         <put-attribute name="body" value="/WEB-INF/tiles/reg/success.jsp" />
     </definition>
 
-    <definition name="app/base" extends="base">
-            <put-attribute name="title" value="Todo - List" />
-            <put-attribute name="body" value="/WEB-INF/tiles/app/list.jsp" />
-        <put-attribute name="manifest" value="/app/manifest/" />
-    </definition>
+    <definition name="app/base" template="/static/browser/index.html" />
 
     <definition name="tos" extends="base">
         <put-attribute name="title" value="Todo - Terms of Service"/>
