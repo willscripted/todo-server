@@ -3,6 +3,7 @@ Ext.define('BS.store.task.Today', {
     alias:'store.task.Today',
     requires:['BS.model.Task', 'BS.data.proxy.JsonSchemaRest'],
     model:'BS.model.Task',
+    sortOnLoad: true,
     proxy:{
         type:'JsonSchemaRest',
         api:{
@@ -19,6 +20,11 @@ Ext.define('BS.store.task.Today', {
             'Content-Type':'application/todo.webapp.dto.TaskDTO+json'
         },
         batchActions:false
+    },
+    listeners: {
+        update: function(store, opts) {
+            store.sort("complete", "ASC");
+        }
     },
     autoLoad:true,
     autoSync:true
