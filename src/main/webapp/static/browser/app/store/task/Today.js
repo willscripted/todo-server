@@ -4,6 +4,10 @@ Ext.define('BS.store.task.Today', {
     requires:['BS.model.Task', 'BS.data.proxy.JsonSchemaRest'],
     model:'BS.model.Task',
     sortOnLoad: true,
+    sorters:[{
+        property: 'complete',
+        direction: 'ASC'
+    }],
     proxy:{
         type:'JsonSchemaRest',
         api:{
