@@ -9,18 +9,31 @@ Ext.define('BS.view.task.DayList', {
         {
             xtype:'checkcolumn',
             dataIndex:'complete',
-            width: 40
+            width:40
         },
         {
             header:'Task',
             dataIndex:'title',
             flex:1,
-            editor: {
-                type: 'textfield',
-                style: {
-                    margin: '4 0'
+            editor:{
+                type:'textfield',
+                style:{
+                    margin:'4 0'
                 }
             }
+        },
+        {
+            xtype:'actioncolumn',
+            width:30,
+            items:[
+                {
+                    icon:'/static/browser/resources/images/delete.png',
+                    handler: function(grid, rowIndex, colIndex) {
+                        console.log("Clicked");
+                        grid.getStore().removeAt(rowIndex);
+                    }
+                }
+            ]
         }
     ],
     align:'stretch',
